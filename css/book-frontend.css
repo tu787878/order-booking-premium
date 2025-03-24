@@ -1469,6 +1469,24 @@ span.required-symbol{
     right: -8px;
     font-size: 9px;
 }
+
+.header .cart-info{
+    display: inline-block;
+    position: relative;
+}
+.header .cart-info span{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    color: #fff;
+    background-color: #f30;
+    border-radius: 50%;
+    top: -5px;
+    right: -8px;
+    font-size: 9px;
+}
 .dsmart-float-cart .total-price{
     display: inline-block;
     font-size: 16px;
