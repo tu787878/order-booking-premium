@@ -239,7 +239,7 @@ if (get_option('homepage_popup') === "2"){
                 ?>
                 <div class="header" style="<?php echo $style;?>">
                     <div class="row">
-                        <span id="openNavBtn" style="font-size:40px;cursor:pointer;margin-left: 7%;color: <?php echo $sidebar_color?> !important;" onclick="openNav()">&#9776;</span>
+                        <span id="openNavBtn" style="font-size:30px;cursor:pointer;margin-left: 7%;color: <?php echo $sidebar_color?> !important;" onclick="openNav()">&#9776;</span>
                         <?php $image_id = get_option('ds_logo');
                                 if ($image_id != null) {
                                     $image = wp_get_attachment_image_src($image_id, 'full'); 
@@ -249,7 +249,7 @@ if (get_option('homepage_popup') === "2"){
                             $cart_id = get_page_id_by_template('templates/cart-page.php');
                         ?>
                         <div class="cart-info">
-                            <i style="margin-right: 7%;font-size:37px;cursor:pointer;color: <?php echo $sidebar_color?> !important;line-height: 1.5;" onclick="window.location='<?php echo get_permalink($cart_id);?>'" class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <i style="font-size:30px;cursor:pointer;color: black !important;line-height: 1.5;" onclick="window.location='<?php echo get_permalink($cart_id);?>'" class="fa fa-shopping-cart" aria-hidden="true"></i>
                             <span><?php $total_quantity = 2; echo $total_quantity; ?></span>
                         </div>
                     </div>

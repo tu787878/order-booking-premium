@@ -14,10 +14,14 @@
     }
 
 	.cart-icon{
-		margin-right: 2% !important;
-		line-height: 1.9 !important;
 		font-size: 30px !important;
 	}
+
+
+	.cart-info{
+		margin-right: 2% !important;
+	}
+
 
 	#openNavBtn{
 		margin-left: 2% !important;
