@@ -248,7 +248,10 @@ if (get_option('homepage_popup') === "2"){
                         <?php
                             $cart_id = get_page_id_by_template('templates/cart-page.php');
                         ?>
-                        <i onclick="window.location='<?php echo get_permalink($cart_id);?>'" class="fa fa-shopping-cart" style="margin-right: 7%;font-size:37px;cursor:pointer;color: <?php echo $sidebar_color?> !important;line-height: 1.5;"></i>
+                        <div class="cart-info">
+                            <i style="margin-right: 7%;font-size:37px;cursor:pointer;color: <?php echo $sidebar_color?> !important;line-height: 1.5;" onclick="window.location='<?php echo get_permalink($cart_id);?>'" class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <span><?php $total_quantity = 2; echo $total_quantity; ?></span>
+                        </div>
                     </div>
                     <?php if($dsmart_horizontal_menu == '1') {?>
                     <div class="horizontal-category">

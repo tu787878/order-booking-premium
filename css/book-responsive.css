@@ -13,6 +13,17 @@
 		top: -0.5em;
     }
 
+	.cart-icon{
+		margin-right: 2% !important;
+		line-height: 1.9 !important;
+		font-size: 30px !important;
+	}
+
+	#openNavBtn{
+		margin-left: 2% !important;
+		font-size: 30px !important;
+	}
+
 	.main-container{
 		display: flex;
 		margin-left: 0px;

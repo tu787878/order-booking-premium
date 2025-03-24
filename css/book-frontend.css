@@ -597,6 +597,10 @@ h2{
   font-weight: 400;
   letter-spacing: 1px;
 }
+
+.menu-list{
+    margin-top: 30px;
+}
 .add-to-cart:hover{
 }
 .add-to-cart-form{
