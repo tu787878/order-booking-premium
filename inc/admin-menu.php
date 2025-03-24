@@ -1053,6 +1053,7 @@ function general_booking_setting()
 						<label><input type="checkbox" name="float_cart" value="on" <?php if ($float_cart == "on") {
 																						echo 'checked';
 																					} ?>><span><?php _e('Warenkorb Float?'); ?></span></label>
+					</div>
 					<h2><?php _e("Horizontal-Menu"); ?></h2>
 					<div class="form-group">
 						<label><input type="checkbox" name="dsmart_horizontal_menu" value="1" <?php if ($dsmart_horizontal_menu == "1") {
