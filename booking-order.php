@@ -2534,6 +2534,7 @@ if (!function_exists('wpse_11826_search_by_title')) {
 add_filter('posts_search', 'wpse_11826_search_by_title', 10, 2);
 
 //add float cart to footer
+
 function dsmart_float_cart()
 {
     date_default_timezone_set('Europe/Berlin');

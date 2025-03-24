@@ -1874,6 +1874,7 @@ jQuery(document).ready(function ($) {
             $Notify.addClass("dsmart-success");
             $Notify.html(data.message);
             $(".dsmart-float-cart .cart-info span").text(data.total);
+            $(".header .cart-info span").text(data.total);
             $(".dsmart-float-cart .total-price").text(data.price);
             if (!$(".dsmart-float-cart").hasClass("active")) {
               $(".dsmart-float-cart").addClass("active");

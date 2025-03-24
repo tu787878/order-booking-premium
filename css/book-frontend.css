@@ -1474,6 +1474,7 @@ span.required-symbol{
     display: inline-block;
     position: relative;
     margin-top: 13px;
+    margin-right: 7%;
 }
 .header .cart-info span{
     position: absolute;
@@ -1482,7 +1483,7 @@ span.required-symbol{
     line-height: 15px;
     text-align: center;
     color: #fff;
-    background-color: #f30;
+    background-color: black;
     border-radius: 50%;
     top: -5px;
     right: -8px;
