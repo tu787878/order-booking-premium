@@ -1200,6 +1200,57 @@ function ds_get_cart_total_quantity($cart = null)
     return $total_all < 1 ? 1 : $total_all;
 }
 
+function ds_get_real_cart_total_quantity($cart = null)
+{
+    if ($cart == null) {
+        if (isset($_COOKIE['cart']) && $_COOKIE['cart'] != "") {
+            $cart = unserialize(base64_decode($_COOKIE['cart']));
+        } else {
+            $cart = array();
+        }
+    }
+    $total_all = 0;
+    if ($cart) {
+        foreach ($cart as $key_item => $value_item) {
+            $product_id = intval($value_item['product_id']);
+            $quantity   = $value_item['quantity'];
+
+            $meta['quantity'] = dsmart_field('quantity', $product_id);
+            $meta['varialbe_price'] = dsmart_field('varialbe_price', $product_id);
+
+            $meta['extra_name'] = dsmart_field('extra_name', $product_id);
+            $meta['extra_price'] = dsmart_field('extra_price', $product_id);
+            $extra_price = 0;
+            if (isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']))) :
+                $extra_info = json_decode(stripslashes($value_item['extra_info']));
+                foreach ($extra_info as $extra_key => $extra_value) {
+                    $extra_id = intval(explode('_', $extra_value->extra_id)[1]) - 1;
+                    $extra_quantity = $extra_value->extra_quantity;
+                    $temp_price = $meta['extra_price'][$extra_id];
+                    $temp_price = floatval($temp_price) * intval($extra_quantity);
+                    $extra_price = $extra_price + $temp_price;
+                }
+            else :
+                $extra_info = [];
+                $extra_price = 0;
+            endif;
+
+            if (isset($value_item['variable_id']) && $meta['quantity'] != null &&  !empty(array_filter($meta['quantity'])) && $meta['varialbe_price'] != null && !empty(array_filter($meta['varialbe_price']))) :
+                $variable_id = intval(explode('_', $value_item['variable_id'])[1]) - 1;
+                $price_item =  floatval($meta['varialbe_price'][$variable_id]) + $extra_price;
+            else :
+                $variable_id = '';
+                $price_item = floatval(dsmart_field('price', $product_id))  + $extra_price * intval($quantity);;
+            endif;
+            $status_item = dsmart_field('status', $value_item['product_id']);
+            if ($status_item == "instock" && $price_item != "") {
+                $total_all = $total_all + intval($quantity);
+            }
+        }
+    }
+    return $total_all;
+}
+
 //convert from m to km
 function ds_convert_m_to_km($value)
 {

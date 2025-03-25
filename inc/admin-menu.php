@@ -96,6 +96,9 @@ function general_booking_setting()
 			$price_color = $_POST['price_color'];
 			update_option('price_color', $price_color, 'yes');
 
+			$quantity_circle_color = $_POST['quantity_circle_color'];
+			update_option('quantity_circle_color', $quantity_circle_color, 'yes');
+
 			// For API Mobile
 			$old_mobile_code = stripslashes_deep(get_option("mobile_code"));
 			$mobile_code = $_POST['mobile_code'];
@@ -867,6 +870,7 @@ function general_booking_setting()
 	$header_color = get_option('header_color');
 	$sidebar_color = get_option('sidebar_color');
 	$price_color = get_option('price_color');
+	$quantity_circle_color = get_option('quantity_circle_color');
 
 	//min order
 	//=======================================================
@@ -1119,6 +1123,11 @@ function general_booking_setting()
 						<div class="form-group">
 							<label><?php _e('Price Color') ?></label>
 							<input type="text" name="price_color" class="coloris" value="<?php echo $price_color; ?>"/>
+						</div>
+
+						<div class="form-group">
+							<label><?php _e('Quantity Circle Color') ?></label>
+							<input type="text" name="quantity_circle_color" class="coloris" value="<?php echo $quantity_circle_color; ?>"/>
 						</div>
 				</div>
 				<div class="tab-content" id="tab-2">

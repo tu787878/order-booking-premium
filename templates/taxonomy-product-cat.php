@@ -247,10 +247,11 @@ if (get_option('homepage_popup') === "2"){
                         <a class="logo-header" href="<?php echo get_option('logo_link')?>"><img src="<?php echo $image[0]; ?>" alt="<?php _e("Logo", 'dsmart') ?>" /></a>    
                         <?php
                             $cart_id = get_page_id_by_template('templates/cart-page.php');
+                            $quantity_circle_color = get_option('quantity_circle_color', 'black');
                         ?>
                         <div class="cart-info">
                             <i style="font-size:30px;cursor:pointer;color: <?php echo $sidebar_color?> !important;" onclick="window.location='<?php echo get_permalink($cart_id);?>'" class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            <span><?php $total_quantity = ds_get_cart_total_quantity(); echo $total_quantity; ?></span>
+                            <span style="background-color: <?php echo  $quantity_circle_color;?> !important;"><?php $total_quantity = ds_get_real_cart_total_quantity(); echo $total_quantity; ?></span>
                         </div>
                     </div>
                     <?php if($dsmart_horizontal_menu == '1') {?>
