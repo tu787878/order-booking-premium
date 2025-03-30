@@ -3336,7 +3336,7 @@ function create_new_order($data, $status = 'processing', $transaction_id = null)
             $has_discount = is_discount_time($user_delivery_time, $user_delivery_date, $shipping_method);
         } else {
             $user_time = $shipping_info['time'];
-            $user_date = date("dd.mm.YYYY");
+            $user_date = date("d.m.Y");
             $has_discount = is_discount_time($user_time, null, $shipping_method);
         }
         if (isset($_COOKIE['coupon']) && $_COOKIE['coupon'] != "") {
