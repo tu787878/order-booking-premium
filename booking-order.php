@@ -1620,6 +1620,7 @@ function send_mail_after_order($order_id)
     $user_latitude = dsmart_field('user_latitude', $order_id);
     $user_longitude = dsmart_field('user_longitude', $order_id);
     $user_time = dsmart_field('user_time', $order_id);
+    $user_date = dsmart_field('user_date', $order_id);
     $user_delivery_time = dsmart_field('user_delivery_time', $order_id);
     $user_delivery_date = dsmart_field('user_delivery_date', $order_id);
     $shipping_fee = dsmart_field('shipping_fee', $order_id);
