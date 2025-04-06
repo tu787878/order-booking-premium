@@ -663,12 +663,6 @@ h2{
     line-height: 1;
 }
 
-.container.clearfix{
-  width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
 .dark-style .container-wrapper{
     background-color: #000 !important;
 }
