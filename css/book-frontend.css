@@ -663,6 +663,9 @@ h2{
     line-height: 1;
 }
 
+.order_page{
+    padding: 5%;
+}
 
 .container.clearfix{
     width: 100% !important;
