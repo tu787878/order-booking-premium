@@ -1,4 +1,7 @@
 <?php 
+$results = get_items_categories_time_info_from_cart();
+echo($results);
+die();
 $coupon_notify = "";
 if(isset($_COOKIE['coupon_notify'])){
 	$coupon_notify = $_COOKIE['coupon_notify'];
