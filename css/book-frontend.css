@@ -787,6 +787,7 @@ h2{
     visibility: visible;
     opacity: 1;
     z-index: 999;
+    color: white;
 }
 
 .items-time-details .inner{

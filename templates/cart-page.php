@@ -72,9 +72,9 @@ get_header(); ?>
 										<div class="modal-box">
 											<div class="category_time_row">
 												<div class="category_item_col">
-													<?php echo $value['cat_name']; 
+													<?php echo $value['cat_name'] . ":"; 
 														?>
-															<ul>
+															<ul style="margin-left: 15px;">
 																<?php
 																	foreach ($value['cat_items'] as $key_item => $value_item) {
 																		?>
@@ -87,7 +87,7 @@ get_header(); ?>
 													?>
 												</div>
 												<div class="category_time_column">
-													<ul>
+													<ul style="margin-left: 15px;list-style: circle;">
 														<?php
 															foreach ($value['cat_times'] as $key_item => $value_item) {
 																?>
