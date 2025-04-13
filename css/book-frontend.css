@@ -791,14 +791,12 @@ h2{
 
 .items-time-details .inner{
     margin: 70px auto;
-    background: #fff;
     border-radius: 5px;
     width: 70%;
     position: relative;
     border: 1px solid #fffcbf;
     background: #000000d4;
     max-width: 600px;
-    margin: auto;
 }
 
 .list-product .variable-product {

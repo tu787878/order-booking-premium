@@ -65,10 +65,40 @@ get_header(); ?>
 					<div class="items-time-details">
 						<div class="inner">
 							<div class="close close-box" >&times;</div>
+							<div class="modal-box">Verfügbare Zeit der Kategorien</div>
 							<?php
 								foreach ($conflicts as $key => $value) {
 									?>
-										<div class="modal-box"><?php echo $value["cat_name"];?></div>
+										<div class="modal-box">
+											<div class="category_time_row">
+												<div class="category_item_col">
+													<?php echo $value['cat_name']; 
+														?>
+															<ul>
+																<?php
+																	foreach ($value['cat_items'] as $key_item => $value_item) {
+																		?>
+																			<li><?php echo $value_item; ?></li>
+																		<?php
+																	}
+																?>
+															</ul>
+														<?php
+													?>
+												</div>
+												<div class="category_time_column">
+													<ul>
+														<?php
+															foreach ($value['cat_times'] as $key_item => $value_item) {
+																?>
+																	<li><?php echo ($value_item["action"] . ": " . $value_item["start"] . " - " . $value_item["end"]); ?></li>
+																<?php
+															}
+														?>
+													</ul>
+												</div>
+											</div>
+										</div>
 									<?php
 								}
 							?>
