@@ -2853,7 +2853,6 @@ function get_items_categories_time_info_from_cart($date=null)
                 if (!isset($entry)) {
                     $entry = array();
                     $entry['cat_name'] = $term->name;
-                    $entry['cat_id'] = $term->term_id;
                     $entry['cat_times'] = get_open_time_category($term->term_id, $date);
                     if($entry['cat_times'] == null || count($entry['cat_times']) == 0)
                     {

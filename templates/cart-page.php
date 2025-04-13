@@ -1,7 +1,4 @@
 <?php 
-$results = get_items_categories_time_info_from_cart();
-var_dump($results);
-die();
 $coupon_notify = "";
 if(isset($_COOKIE['coupon_notify'])){
 	$coupon_notify = $_COOKIE['coupon_notify'];
@@ -195,17 +192,25 @@ get_header(); ?>
 		<?php endif; ?>		
 
 		<?php 
-			$results = get_items_categories_time_info_from_cart();
-			echo($results);
-			die();
-			// print open time in details dialog
+			$conflicts = get_items_categories_time_info_from_cart();
+			var_dump($conflicts);
+			if($conflicts != null && count($conflicts) > 2){
+				?>
+					<div class="items-time-details">
+						<div class="inner">
+							<div class="close close-box" >&times;</div>
+							<?php
+								foreach ($conflicts as $key => $value) {
+									?>
+										<div class="modal-box"><?php echo $value["cat_name"];?></div>
+									<?php
+								}
+							?>
+						</div>
+					</div>
+				<?php
+			}
 		?>
-		<div class="items-time-details">
-			<div class="inner">
-				<div class="close close-box" >&times;</div>
-			</div>
-		</div>
-
 		<div class="dsmart-cart-total">
 			<div class="shipping_caculate">
 				<?php if($dsmart_method_ship == "on" || $dsmart_method_direct == "on"): ?>
