@@ -78,6 +78,10 @@ function closeNav() {
 
 jQuery(document).ready(function ($) {
 
+  $('#toggle-items-time-details').click(function() {
+    $('.items-time-details').show();
+	});
+
   $(".owl-carousel").owlCarousel({
     autoWidth: true,
     nav: false,
@@ -95,12 +99,6 @@ jQuery(document).ready(function ($) {
     if(!self){
       $(this).hide();
     }
-  });
-
-  document.getElementById('toggle-items-time-details').addEventListener('click', function () {
-    const details = document.querySelector('.items-time-details');
-    details.style.visible = 'visible';
-    details.style.opacity = '1'; 
   });
 
   $(".items-time-details").click(function (e) {
