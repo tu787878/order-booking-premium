@@ -97,6 +97,12 @@ jQuery(document).ready(function ($) {
     }
   });
 
+  document.getElementById('toggle-items-time-details').addEventListener('click', function () {
+    const details = document.querySelector('.items-time-details');
+    details.style.visible = 'visible';
+    details.style.opacity = '1'; 
+  });
+
   $(".items-time-details").click(function (e) {
     var p = e.target;
     var self = p.closest('.inner');

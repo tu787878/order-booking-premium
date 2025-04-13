@@ -25,6 +25,7 @@ $dsmart_method_direct 	= get_option('dsmart_method_direct');
 $dsmart_cart_text 		= get_option('dsmart_cart_text');	
 $dsmart_cart_color 		= get_option('dsmart_cart_color');	
 $dsmart_cart_background = get_option('dsmart_cart_background');	
+$conflicts = get_items_categories_time_info_from_cart();
 
 $type_promotion 		= get_option('type_promotion');	
 $promotion 				= get_option('promotion');	
@@ -58,8 +59,6 @@ get_header(); ?>
 <div class="cart-page container">
 	<?php if(count($cart) > 0): ?>
 		<?php 
-			$conflicts = get_items_categories_time_info_from_cart();
-			var_dump($conflicts);
 			if($conflicts != null && count($conflicts) >= 2){
 				?>
 					<div class="items-time-details">
@@ -251,6 +250,13 @@ get_header(); ?>
 							<?php if($dsmart_method_direct == "on"): ?><option value="direct"><?php _e("im Laden Abholen",'dsmart'); ?></option><?php endif;?>
 						</select>
 					</div>
+					<?php 
+						if($conflicts != null && count($conflicts) >= 2){
+							?>
+								<a href="javascript:void(0);" id="toggle-items-time-details">Verfügbare Zeit der Kategorien anzeigen</a>
+							<?php
+						}
+					?>
 					<?php if($dsmart_method_ship == "on"): ?>
 						<div class="select-wrap get-current-location"/>
 							<div class="select-wrap get-delivery-date"/>
