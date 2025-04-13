@@ -190,6 +190,19 @@ get_header(); ?>
 		 if($dsmart_cart_text != ''): ?>
 			<p class="dsmart-cart-note" style="color: <?php echo $dsmart_cart_color; ?>;background-color: <?php echo $dsmart_cart_background; ?>;"><?php echo $dsmart_cart_text; ?></p>
 		<?php endif; ?>		
+
+		<?php 
+			$results = get_items_categories_time_info_from_cart();
+			echo($results);
+			die();
+			// print open time in details dialog
+		?>
+		<div class="items-time-details">
+			<div class="inner">
+				<div class="close close-box" >&times;</div>
+			</div>
+		</div>
+
 		<div class="dsmart-cart-total">
 			<div class="shipping_caculate">
 				<?php if($dsmart_method_ship == "on" || $dsmart_method_direct == "on"): ?>

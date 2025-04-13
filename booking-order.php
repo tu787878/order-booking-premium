@@ -3,7 +3,7 @@
 /**
  * Plugin Name: TCG Restaurant Shop Premium
  * Description: Restaurant Shop for delivery and take away
- * Version: 1.1.8
+ * Version: 1.1.9
  * License: GPLv2 or later
  */
 define('BOOKING_ORDER_PATH', plugin_dir_url(__FILE__));
@@ -2830,6 +2830,120 @@ function get_close_time_shop2_nodelay()
             $array_text[] = array($time_close_shop, "23:59");
         }
         return $array_text;
+    }
+}
+
+function get_items_categories_time_info_from_cart($date=null)
+{
+    if (isset($_COOKIE['cart']) && $_COOKIE['cart'] != "") {
+        $cart = unserialize(base64_decode($_COOKIE['cart']));
+    } else {
+        $cart = array();
+    }
+
+    $cart = make_cart_items_available($cart);
+    $result = array();
+
+    if ($cart) {
+        foreach ($cart as $key_item => $value_item) {
+            $product_id = intval($value_item['product_id']);
+            $terms = get_the_terms( $product_id, 'product-cat');
+            foreach ($terms as $term) {
+                $entry = $result[$term->term_id];
+                if (!isset($entry)) {
+                    $entry = array();
+                    $entry['cat_name'] = $term->name;;
+                    $entry['cat_times'] = get_open_time_category($term->term_id, $date);
+                } 
+                $entry['cat_items'][] = get_the_title($product_id);
+                $result[$term->term_id] = $entry;
+            }
+        }
+    }
+    return $result;
+}
+
+function get_open_time_category($t_id, $specific_date = null)
+{
+    $tax_enable = get_term_meta( $t_id, 'tax_enable', true );
+    if($tax_enable === "0") return array(array ("00:00", "23:59"));
+
+    date_default_timezone_set('Europe/Berlin');
+    if($specific_date == null)
+    {
+        $current_date = date('d-m-Y');
+    }
+    else
+    {
+        $current_date = $specific_date;
+    }
+    
+    $tax_custom_date = get_term_meta( $t_id, 'tax_new_custom_date', true );
+    if($tax_custom_date == "" || !$tax_custom_date)
+    {
+		$tax_custom_date = [];
+	}
+    $time_category_custom_array = array();
+    $isCustom = false;
+
+    if ($tax_custom_date != "" && count($tax_custom_date) > 0) 
+    {
+        foreach ($tax_custom_date as $item) 
+        {
+            $correct_single = $item["date_type"] === "single" && $item["start_date"] === $current_date;
+            $correct_mutiple = $item["date_type"] !== "single" && $current_date >= $item["start_date"] && $current_date <= $item["end_date"];
+            if($correct_single || $correct_mutiple)
+            {   
+                $isCustom = true; 
+                if($item["status"] === "open")
+                {
+                    if($item["time_type"] === "time_to_time")
+                    {
+                        $time_category_custom_array[] = array($item["start_time"], $item["end_time"]);
+                    }
+                    else
+                    {
+                        $time_category_custom_array[] = array("00:00", "23:59");
+                    }
+                }
+                // TODO: add the close custom time
+            }
+        } 
+    }
+
+    if(!$isCustom)
+    {
+        $time_category_array = [];
+        if($specific_date != null)
+        {
+            $week_day = custom_date(date(format: 'w', timestamp: strtotime($specific_date)));
+        }
+        else
+        {
+            $week_day = custom_date();
+        }
+        $tax_time = get_term_meta($t_id, 'tax_time', true);
+        if ($tax_time != "" && count($tax_time) > 0) 
+        {
+            foreach ($tax_time as $value) 
+            {
+                $time_date = $value['date'];
+                $time_open = $value['open'];
+                $time_close = $value['close'];
+                if ($time_date == $week_day)
+                {
+                    if($time_open != "" && $time_close != "")
+                    {
+                        $time_category_array[] = array($time_open, $time_close);
+                    }
+                }
+            }
+        }
+        return $time_category_array;
+    }
+    else 
+    {
+        return $time_category_custom_array;
     }
 }
 

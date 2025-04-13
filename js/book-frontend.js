@@ -97,6 +97,18 @@ jQuery(document).ready(function ($) {
     }
   });
 
+  $(".items-time-details").click(function (e) {
+    var p = e.target;
+    var self = p.closest('.inner');
+    if(!self){
+      $(this).hide();
+    }
+  });
+
+  $('.items-time-details .close-box').click(function() {
+    $(this).parent(".inner").parent(".items-time-details").hide();
+	});
+
   $('.close-variable').click(function() {
     $(this).parent(".inner").parent(".variable-product").hide();
 	});
