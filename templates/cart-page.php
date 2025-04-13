@@ -57,6 +57,26 @@ $price_color = get_option('price_color', '#b28e2d');
 get_header(); ?>
 <div class="cart-page container">
 	<?php if(count($cart) > 0): ?>
+		<?php 
+			$conflicts = get_items_categories_time_info_from_cart();
+			var_dump($conflicts);
+			if($conflicts != null && count($conflicts) > 2){
+				?>
+					<div class="items-time-details">
+						<div class="inner">
+							<div class="close close-box" >&times;</div>
+							<?php
+								foreach ($conflicts as $key => $value) {
+									?>
+										<div class="modal-box"><?php echo $value["cat_name"];?></div>
+									<?php
+								}
+							?>
+						</div>
+					</div>
+				<?php
+			}
+		?>
 		<?php if($coupon_notify != ""){show_coupon_notify($coupon_notify);} ?>
 		<div class="dsmart-notify"></div>
 		<div class="dsmart-table">
@@ -190,27 +210,6 @@ get_header(); ?>
 		 if($dsmart_cart_text != ''): ?>
 			<p class="dsmart-cart-note" style="color: <?php echo $dsmart_cart_color; ?>;background-color: <?php echo $dsmart_cart_background; ?>;"><?php echo $dsmart_cart_text; ?></p>
 		<?php endif; ?>		
-
-		<?php 
-			$conflicts = get_items_categories_time_info_from_cart();
-			var_dump($conflicts);
-			if($conflicts != null && count($conflicts) > 2){
-				?>
-					<div class="items-time-details">
-						<div class="inner">
-							<div class="close close-box" >&times;</div>
-							<?php
-								foreach ($conflicts as $key => $value) {
-									?>
-										<div class="modal-box"><?php echo $value["cat_name"];?></div>
-									<?php
-								}
-							?>
-						</div>
-					</div>
-				<?php
-			}
-		?>
 		<div class="dsmart-cart-total">
 			<div class="shipping_caculate">
 				<?php if($dsmart_method_ship == "on" || $dsmart_method_direct == "on"): ?>
