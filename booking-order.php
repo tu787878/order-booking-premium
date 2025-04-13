@@ -2852,7 +2852,8 @@ function get_items_categories_time_info_from_cart($date=null)
                 $entry = $result[$term->term_id];
                 if (!isset($entry)) {
                     $entry = array();
-                    $entry['cat_name'] = $term->name;;
+                    $entry['cat_name'] = $term->name;
+                    $entry['cat_id'] = $term->term_id;
                     $entry['cat_times'] = get_open_time_category($term->term_id, $date);
                 } 
                 $entry['cat_items'][] = get_the_title($product_id);
@@ -2866,7 +2867,7 @@ function get_items_categories_time_info_from_cart($date=null)
 function get_open_time_category($t_id, $specific_date = null)
 {
     $tax_enable = get_term_meta( $t_id, 'tax_enable', true );
-    if($tax_enable === "0") return array(array ("00:00", "23:59"));
+    if($tax_enable === "0") return array(array ("action" => "close", "start" => "00:00", "end" => "23:59"));
 
     date_default_timezone_set('Europe/Berlin');
     if($specific_date == null)
@@ -2895,18 +2896,14 @@ function get_open_time_category($t_id, $specific_date = null)
             if($correct_single || $correct_mutiple)
             {   
                 $isCustom = true; 
-                if($item["status"] === "open")
-                {
-                    if($item["time_type"] === "time_to_time")
+                if($item["time_type"] === "time_to_time")
                     {
-                        $time_category_custom_array[] = array($item["start_time"], $item["end_time"]);
+                        $time_category_custom_array[] = array("action" => $item["status"], "start" => $item["start_time"], "end" => $item["end_time"]);
                     }
                     else
                     {
-                        $time_category_custom_array[] = array("00:00", "23:59");
+                        $time_category_custom_array[] = array("action" => $item["status"],"start" => "00:00", "end" => "23:59");
                     }
-                }
-                // TODO: add the close custom time
             }
         } 
     }
@@ -2934,7 +2931,7 @@ function get_open_time_category($t_id, $specific_date = null)
                 {
                     if($time_open != "" && $time_close != "")
                     {
-                        $time_category_array[] = array($time_open, $time_close);
+                        $time_category_array[] = array("action" => "open", "start" => $time_open, "end" => $time_close);
                     }
                 }
             }
