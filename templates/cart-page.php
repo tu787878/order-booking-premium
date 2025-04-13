@@ -60,7 +60,7 @@ get_header(); ?>
 		<?php 
 			$conflicts = get_items_categories_time_info_from_cart();
 			var_dump($conflicts);
-			if($conflicts != null && count($conflicts) > 2){
+			if($conflicts != null && count($conflicts) >= 2){
 				?>
 					<div class="items-time-details">
 						<div class="inner">
