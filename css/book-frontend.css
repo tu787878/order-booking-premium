@@ -784,8 +784,8 @@ h2{
     right: 0;
     background: rgba(0, 0, 0, 0.7);
     transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
+    visibility: visible;
+    opacity: 1;
     z-index: 999;
 }
 
@@ -854,6 +854,20 @@ h2{
 
   .variable-product .inner sup {
     color: white !important;
+  }
+
+  .items-time-details .inner .close {
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+  .items-time-details .inner .close:hover {
+    color: #06D85F;
   }
 
   .variable-product .inner .close {
