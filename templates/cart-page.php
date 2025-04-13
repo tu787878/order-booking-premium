@@ -253,7 +253,7 @@ get_header(); ?>
 					<?php 
 						if($conflicts != null && count($conflicts) >= 2){
 							?>
-								<a href="javascript:void(0);" id="toggle-items-time-details">Verfügbare Zeit der Kategorien anzeigen</a>
+								<a href="javascript:void(0);" style="color: #459b9f;font-weight: bolder;" id="toggle-items-time-details">Verfügbare Zeit der Kategorien anzeigen</a>
 							<?php
 						}
 					?>
