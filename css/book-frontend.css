@@ -499,6 +499,7 @@ h2{
     img:hover{
         transform: scale(1.05);
     }
+    justify-content: center;
 }
 
 .menu-meals h2.change_when_scroll
