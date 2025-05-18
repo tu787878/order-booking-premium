@@ -90,7 +90,7 @@ get_header(); ?>
 												<div class="category_time_column">
 													<ul style="margin-left: 15px;list-style: circle;">
 														<?php
-															if(count($entry['cat_times']) == 0){
+															if(count($value['cat_times']) == 0){
 																?><li>Öffnungszeiten</li><?php
 															}
 															else{
