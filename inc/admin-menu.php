@@ -176,6 +176,9 @@ function general_booking_setting()
 		$enable_pool = $_POST['enable_pool'];
 		update_option('enable_pool', $enable_pool, 'yes');
 
+		$enable_display_conflicts = $_POST['enable_display_conflicts'];
+		update_option('enable_display_conflicts', $enable_display_conflicts, 'yes');
+
 		$homepage_popup = $_POST['homepage_popup'];
 		update_option('homepage_popup', $homepage_popup, 'yes');
 		
@@ -1014,6 +1017,7 @@ function general_booking_setting()
 	//second order
 	$show_second_number = get_option('show_second_number');
 	$enable_pool = get_option('enable_pool');
+	$enable_display_conflicts = get_option('enable_display_conflicts');
 	$homepage_popup = get_option('homepage_popup');
 	$current_date = date('Ymd');
 	$total_order_in_date = (get_option('total_order_' . $current_date) != "") ? intval(get_option('total_order_' . $current_date)) : 0;
@@ -1284,10 +1288,18 @@ function general_booking_setting()
 				</div>
 			<div class="tab-content" id="tab-4">
 			<h2><?php _e("Pool Druckverteilung?"); ?></h2>
-					<div class="radio-wrap">
-						<label><input type="radio" name="enable_pool" value="0" <?php if ($enable_pool != "1") echo 'checked'; ?>>Aus</label>
-						<label><input type="radio" name="enable_pool" value="1" <?php if ($enable_pool == "1") echo 'checked'; ?>>An</label>
-					</div>
+			<div class="radio-wrap">
+				<label><input type="radio" name="enable_pool" value="0" <?php if ($enable_pool != "1") echo 'checked'; ?>>Aus</label>
+				<label><input type="radio" name="enable_pool" value="1" <?php if ($enable_pool == "1") echo 'checked'; ?>>An</label>
+			</div>
+
+			<h2><?php _e("Zeitkonflikte anzeigen?"); ?></h2>
+			<div class="radio-wrap">
+				<label><input type="radio" name="enable_display_conflicts" value="0" <?php if ($enable_display_conflicts != "1") echo 'checked'; ?>>Aus</label>
+				<label><input type="radio" name="enable_display_conflicts" value="1" <?php if ($enable_display_conflicts == "1") echo 'checked'; ?>>An</label>
+			</div>
+
+
 				<h2><?php _e("Lieferung & Abholung Einstellungen") ?></h2>
 
 				<div class="form-group">

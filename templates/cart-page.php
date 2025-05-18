@@ -55,11 +55,12 @@ endif;
 
 $button_color = get_option('button_color', '#50aecc');
 $price_color = get_option('price_color', '#b28e2d');
+$show_time_conflict = get_option('enable_display_conflicts', '0');
 get_header(); ?>
 <div class="cart-page container">
 	<?php if(count($cart) > 0): ?>
 		<?php 
-			if($conflicts != null && count($conflicts) >= 2){
+			if($show_time_conflict === '1' && $conflicts != null && count($conflicts) >= 1){
 				?>
 					<div class="items-time-details">
 						<div class="inner">
@@ -251,7 +252,7 @@ get_header(); ?>
 						</select>
 					</div>
 					<?php 
-						if($conflicts != null && count($conflicts) >= 2){
+						if($show_time_conflict === '1' && $conflicts != null && count($conflicts) >= 1){
 							?>
 								<a href="javascript:void(0);" style="color: #459b9f;font-weight: bolder;" id="toggle-items-time-details">Verfügbare Zeit der Kategorien anzeigen</a>
 							<?php
