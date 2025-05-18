@@ -26,6 +26,7 @@ $dsmart_cart_text 		= get_option('dsmart_cart_text');
 $dsmart_cart_color 		= get_option('dsmart_cart_color');	
 $dsmart_cart_background = get_option('dsmart_cart_background');	
 $conflicts = get_items_categories_time_info_from_cart();
+$conflicts_all = get_items_categories_time_info_from_cart_with_no_custom_time();
 
 $type_promotion 		= get_option('type_promotion');	
 $promotion 				= get_option('promotion');	
@@ -67,7 +68,7 @@ get_header(); ?>
 							<div class="close close-box" >&times;</div>
 							<div class="modal-box">Verfügbare Zeit der Kategorien</div>
 							<?php
-								foreach ($conflicts as $key => $value) {
+								foreach ($conflicts_all as $key => $value) {
 									?>
 										<div class="modal-box">
 											<div class="category_time_row">
@@ -89,10 +90,15 @@ get_header(); ?>
 												<div class="category_time_column">
 													<ul style="margin-left: 15px;list-style: circle;">
 														<?php
-															foreach ($value['cat_times'] as $key_item => $value_item) {
+															if(count($entry['cat_times']) == 0){
+																?><li>Öffnungszeiten</li><?php
+															}
+															else{
+																foreach ($value['cat_times'] as $key_item => $value_item) {
 																?>
 																	<li><?php echo ($value_item["action"] . ": " . $value_item["start"] . " - " . $value_item["end"]); ?></li>
 																<?php
+																}
 															}
 														?>
 													</ul>

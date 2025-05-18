@@ -2867,6 +2867,40 @@ function get_items_categories_time_info_from_cart($date=null)
     return $result;
 }
 
+function get_items_categories_time_info_from_cart_with_no_custom_time($date=null)
+{
+    if (isset($_COOKIE['cart']) && $_COOKIE['cart'] != "") {
+        $cart = unserialize(base64_decode($_COOKIE['cart']));
+    } else {
+        $cart = array();
+    }
+
+    $cart = make_cart_items_available($cart);
+    $result = array();
+
+    if ($cart) {
+        foreach ($cart as $key_item => $value_item) {
+            $product_id = intval($value_item['product_id']);
+            $terms = get_the_terms( $product_id, 'product-cat');
+            foreach ($terms as $term) {
+                $entry = $result[$term->term_id];
+                if (!isset($entry)) {
+                    $entry = array();
+                    $entry['cat_name'] = $term->name;
+                    $entry['cat_times'] = get_open_time_category($term->term_id, $date);
+                    if($entry['cat_times'] == null || count($entry['cat_times']) == 0)
+                    {
+                        $entry['cat_times'] = [];
+                    }
+                } 
+                $entry['cat_items'][] = get_the_title($product_id);
+                $result[$term->term_id] = $entry;
+            }
+        }
+    }
+    return $result;
+}
+
 function get_open_time_category($t_id, $specific_date = null)
 {
     $tax_enable = get_term_meta( $t_id, 'tax_enable', true );
