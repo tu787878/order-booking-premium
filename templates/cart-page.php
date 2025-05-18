@@ -91,12 +91,13 @@ get_header(); ?>
 													<ul style="margin-left: 15px;list-style: circle;">
 														<?php
 															if(count($value['cat_times']) == 0){
-																?><li>Öffnungszeiten</li><?php
+																?><li>Öffnungszeiten vom Restaurant</li><?php
 															}
 															else{
 																foreach ($value['cat_times'] as $key_item => $value_item) {
+																	$action_str = $value_item["action"] === "open" ? "Öffnungszeiten" : "Schließzeiten";
 																?>
-																	<li><?php echo ($value_item["action"] . ": " . $value_item["start"] . " - " . $value_item["end"]); ?></li>
+																	<li><?php echo ($action_str . ": " . $value_item["start"] . " - " . $value_item["end"]); ?></li>
 																<?php
 																}
 															}
