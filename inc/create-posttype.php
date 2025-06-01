@@ -197,13 +197,12 @@ function my_orders_filter(){
 		global $wp_query;
 		if ($screen->post_type == 'orders') {	
             $method = "";		
-			if(isset($_GET['category_filter'])){
-                $method = $_GET['category_filter'];
+			if(isset($_GET['method_filter'])){
+                $method = $_GET['method_filter'];
             }
 			?>
 
-			<select name="category_filter">
-				<option value="">Alle Kategorien</option>
+			<select name="method_filter">
                         <option value="" <?php if($method == ""){echo 'selected';} ?>><?php _e("Alle Zahlungsmethode") ?></option>
 						<option value="paypal" <?php if($method == "paypal"){echo 'selected';} ?>><?php _e("Paypal") ?></option>
 						<option value="klarna" <?php if($method == "klarna"){echo 'selected';} ?>><?php _e("Klarna") ?></option>
