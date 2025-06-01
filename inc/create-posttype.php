@@ -191,3 +191,31 @@ function my_author_filter_results($query){
     }
 }
 add_action('pre_get_posts','my_author_filter_results');
+
+function my_orders_filter(){
+        $screen = get_current_screen();
+		global $wp_query;
+		if ($screen->post_type == 'orders') {?>
+			<select name="method_filter">
+				<option value="">Alle Kategorien</option>
+				<option value="cash">Barzahlung</option>
+                <option value="paypal">Paypal</option>
+                <option value="paypal">klarna</option>
+			</select>	
+			<?php
+		}
+}
+add_action('restrict_manage_orders','my_orders_filter');
+
+// cash, paypal, klarna
+function my_orders_filter_results($query){
+    $screen = get_current_screen();
+    global $post_type; 
+    if ($screen->post_type == 'orders') {
+        if(isset($_GET['method_filter']) && $_GET['method_filter'] !== ""){
+            $query->query_vars['meta_key'] = 'method';
+            $query->query_vars['meta_value'] = $_GET['method_filter'];
+        }
+    }
+}
+add_action('pre_get_orders','my_orders_filter_results');
