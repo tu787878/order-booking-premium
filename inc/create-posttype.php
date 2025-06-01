@@ -195,12 +195,19 @@ add_action('pre_get_posts','my_author_filter_results');
 function my_orders_filter(){
         $screen = get_current_screen();
 		global $wp_query;
-		if ($screen->post_type == 'orders') {?>
-			<select name="method_filter">
+		if ($screen->post_type == 'orders') {	
+            $method = "";		
+			if(isset($_GET['category_filter'])){
+                $method = $_GET['category_filter'];
+            }
+			?>
+
+			<select name="category_filter">
 				<option value="">Alle Kategorien</option>
-				<option value="cash">Barzahlung</option>
-                <option value="paypal">Paypal</option>
-                <option value="paypal">klarna</option>
+                        <option value="" <?php if($method == ""){echo 'selected';} ?>><?php _e("Alle Zahlungsmethode") ?></option>
+						<option value="paypal" <?php if($method == "paypal"){echo 'selected';} ?>><?php _e("Paypal") ?></option>
+						<option value="klarna" <?php if($method == "klarna"){echo 'selected';} ?>><?php _e("Klarna") ?></option>
+						<option value="cash" <?php if($method == "cash"){echo 'selected';} ?>><?php _e("Barzahlung") ?></option>
 			</select>	
 			<?php
 		}
