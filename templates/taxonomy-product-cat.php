@@ -387,7 +387,7 @@ if (get_option('homepage_popup') === "2"){
                                                     </div>
                                                     <div class="right-item">
                                                         <?php if (($dsmart_stock == "1" || ($dsmart_stock != "1" && $ds_status_product == "instock")) && $price != "") :
-                                                            if ($isExtra || $isVariable) : 
+                                                            if ($isExtra || $isVariable || $isSidedish ) : 
                                                                 if(!$isVariable){ ?>
                                                                     <div class="price"><span style="color:<?php echo $price_color ?> !important"><?php echo ds_price_format_text($price); ?></span></div>
                                                                 <?php }?>
