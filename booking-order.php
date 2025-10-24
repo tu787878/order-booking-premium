@@ -3,7 +3,7 @@
 /**
  * Plugin Name: TCG Restaurant Shop Premium
  * Description: Restaurant Shop for delivery and take away
- * Version: 1.0.0.1
+ * Version: 1.0.0.2
  * License: GPLv2 or later
  */
 define('BOOKING_ORDER_PATH', plugin_dir_url(__FILE__));
@@ -34,9 +34,11 @@ add_action('widgets_init', function() {
 });
 
 function book_slice_orderby( $query ) {
-    if( ! is_admin() )
-        return;
- 
+  if( !is_admin() )
+       return;
+  if($query->query['suppress_filters']) {
+    return;
+  }
   $query->set( 'orderby', 'date' );
   $query->set( 'order', 'desc' );
 }
