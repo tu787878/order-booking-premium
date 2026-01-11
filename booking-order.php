@@ -3,7 +3,7 @@
 /**
  * Plugin Name: TCG Restaurant Shop Premium
  * Description: Restaurant Shop for delivery and take away
- * Version: 1.0.0.3
+ * Version: 1.0.0.4
  * License: GPLv2 or later
  */
 define('BOOKING_ORDER_PATH', plugin_dir_url(__FILE__));
@@ -4169,20 +4169,26 @@ function check_category_open_or_not($t_id)
 		$dsmart_new_custom_date = [];
 	}
     if ($dsmart_new_custom_date != "" && count($dsmart_new_custom_date) > 0) {
-        $current_date = date("d-m-Y");
+        $current_date = date("Y-m-d");
         $current_time = date("H:i");
         foreach ($dsmart_new_custom_date as $item) {
-            $correct_single = $item["date_type"] === "single" && $item["start_date"] === $current_date;
-            $correct_mutiple = $item["date_type"] !== "single" && $current_date >= $item["start_date"] && $current_date <= $item["end_date"];
+            $start_date = date("Y-m-d", strtotime($item["start_date"]));
+            $end_date = date("Y-m-d", strtotime($item["end_date"]));
+
+            $correct_single = $item["date_type"] === "single" && $start_date === $current_date;
+            $correct_mutiple = $item["date_type"] !== "single" && $current_date >= $start_date && $current_date <= $end_date;
             if($correct_single || $correct_mutiple){    
                 if($item["time_type"] === "time_to_time"){
                     if($current_time >= $item["start_time"] && $current_time <= $item["end_time"]){
-                        return $item["status"] !== "close";
+                        if ($item["status"] === "close") {
+                            return false;
+                        }
                     }
-                    return $item["status"] === "close";
                 }
                 else{
-                    return $item["status"] !== "close";
+                    if ($item["status"] === "close") {
+                        return false;
+                    }
                 }
             }
         } 
