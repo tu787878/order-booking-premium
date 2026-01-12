@@ -18,26 +18,39 @@ body.dark-style .current_category_box{
     width: 100%;
     overflow: hidden;
     height: 30px;
+    white-space: nowrap;
   }
   .marquee-child {
-    display: block;
-    /* width: 147px; */
-    /* width of your text div */
+    display: inline-block;
+    white-space: nowrap;
     height: 30px;
-    /* height of your text div */
+    line-height: 30px;
     position: absolute;
-    animation: marquee 8s linear infinite; /* change 5s value to your desired speed */
+    top: 0;
+    will-change: transform;
+    left: 100%;
+    /* Start animation immediately with default values */
+    /* Adjust the duration (15s) to change default speed: lower = faster, higher = slower */
+    animation: marquee-scroll 12s linear infinite;
   }
   .marquee-child:hover {
-    animation-play-state: paused;
+    animation-play-state: paused !important;
     cursor: pointer;
   }
-  @keyframes marquee {
+  .marquee-child.no-animate {
+    position: relative;
+    left: auto !important;
+    animation: none !important;
+    text-align: center;
+    width: auto !important;
+    transform: none !important;
+  }
+  @keyframes marquee-scroll {
     0% {
-      left: 100%;
+      transform: translateX(0);
     }
     100% {
-      left: -147px /* same as your text width */
+      transform: translateX(-100%);
     }
   }
 
