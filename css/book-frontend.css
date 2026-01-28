@@ -1170,6 +1170,13 @@ h2{
 .dsmart-button:disabled,.dsmart-button[disabled]{
     background-color: #6c89b1;
 }
+/* Thank you page (success only) */
+.order_page .ds-thankyou{
+    text-align: center;
+}
+.order_page .ds-thankyou .ds-thankyou-actions .ds-thankyou-back-btn{
+    color: #fff;
+}
 .dsmart-table .update-cart{
     float: right;
 }

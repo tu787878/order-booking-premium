@@ -14,8 +14,8 @@ if (isset($_GET['success']) && $_GET['success'] == '1') {
 	echo '<div class="order_page">';
 	echo '<div class="ds-thankyou">';
 	echo '<h2>' . esc_html__('Vielen Dank', 'dsmart') . '</h2>';
-	echo '<h2>' . esc_html__('Ihre Bestellung war erfolgreich', 'dsmart') . '</h2>';
-	echo '<p class="ds-thankyou-actions"><a href="' . esc_url($shop_url) . '" class="dsmart-button">' . esc_html__('Zurück zum Shop', 'dsmart') . '</a></p>';
+	echo '<h6>' . esc_html__('Ihre Bestellung war erfolgreich', 'dsmart') . '</h6>';
+	echo '<p class="ds-thankyou-actions"><a href="' . esc_url($shop_url) . '" class="dsmart-button ds-thankyou-back-btn">' . esc_html__('Zurück zum Shop', 'dsmart') . '</a></p>';
 	echo '</div></div>';
 	get_footer();
 	exit;
