@@ -1829,7 +1829,7 @@ function checkout_cart()
 					$order_id = create_new_order($checkout_data);
 					echo json_encode(array(
 						'check' => true,
-						'redirect_url' => get_permalink($order_id),
+						'redirect_url' => get_permalink($thankyou_page) . '?success=1',
 					));
 				}
 			} else {
@@ -1837,7 +1837,7 @@ function checkout_cart()
 				$order_id = create_new_order($checkout_data);
 				echo json_encode(array(
 					'check' => true,
-					'redirect_url' => get_permalink($order_id),
+					'redirect_url' => get_permalink($thankyou_page) . '?success=1',
 				));
 			}
 		} else {
