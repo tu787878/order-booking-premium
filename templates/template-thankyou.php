@@ -8,17 +8,47 @@ use PayPalCheckoutSdk\Orders\OrdersCaptureRequest;*/
 
 // Show thank you page with only success message (no order info)
 if (isset($_GET['success']) && $_GET['success'] == '1') {
-	$shop_page_id = get_page_id_by_template('templates/shop-page.php');
-	$shop_url = $shop_page_id ? get_permalink($shop_page_id) : home_url();
-	get_header();
-	echo '<div class="order_page">';
-	echo '<div class="ds-thankyou">';
-	echo '<h2>' . esc_html__('Vielen Dank', 'dsmart') . '</h2>';
-	echo '<h6>' . esc_html__('Ihre Bestellung war erfolgreich', 'dsmart') . '</h6>';
-	echo '<p class="ds-thankyou-actions"><a href="' . esc_url($shop_url) . '" class="dsmart-button ds-thankyou-back-btn">' . esc_html__('Zurück zum Shop', 'dsmart') . '</a></p>';
-	echo '</div></div>';
-	get_footer();
-	exit;
+    $shop_page_id = get_page_id_by_template('templates/shop-page.php');
+    $shop_url = $shop_page_id ? get_permalink($shop_page_id) : home_url('/');
+    $button_color = get_option('button_color', '#50aecc');
+    get_header();
+    ?>
+    <style>
+        /* Light mode styles */
+        .order_page.ds-thankyou-page { 
+            text-align: center; 
+        }
+        .order_page.ds-thankyou-page .ds-thankyou { 
+            max-width: 600px; 
+            margin: 0 auto; 
+        }
+        .order_page.ds-thankyou-page .ds-thankyou h2, .order_page.ds-thankyou-page .ds-thankyou h6 { 
+            margin: 0.5em 0;
+        }
+        .order_page.ds-thankyou-page .ds-thankyou-actions { 
+            margin-top: 1.5em; 
+        }
+        
+        /* Dark mode styles */
+        .order_page.ds-thankyou-page .ds-thankyou h2, body.dark-style .order_page.ds-thankyou-page .ds-thankyou h6 {
+            color: #fff !important;
+        }
+        .order_page.ds-thankyou-page .ds-thankyou .dsmart-button {
+            color: #fff !important;
+        }
+    </style>
+    <div class="order_page ds-thankyou-page">
+        <div class="ds-thankyou">
+            <h2><?php _e('Vielen Dank', 'dsmart'); ?></h2>
+            <h6><?php _e('Ihre Bestellung war erfolgreich!', 'dsmart'); ?></h6>
+            <p class="ds-thankyou-actions">
+                <a href="<?php echo esc_url($shop_url); ?>" class="dsmart-button" style="background: <?php echo esc_attr($button_color); ?> !important;"><?php _e('Zurück zum Shop', 'dsmart'); ?></a>
+            </p>
+        </div>
+    </div>
+    <?php
+    get_footer();
+    exit;
 }
 
 if(isset($_GET['PayerID']) && isset($_GET['order']) && isset($_GET['token-success'])){
