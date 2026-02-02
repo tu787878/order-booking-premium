@@ -1,8 +1,15 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <?php global $post;
 $current_user = wp_get_current_user();
-// Restrict access to administrators only
-if ( ! in_array( 'administrator', (array) $current_user->roles ) ) {
+// Allow: logged-in users can view their own order; administrators and shop role can view any order
+if ( ! is_user_logged_in() ) {
+    wp_redirect( home_url() );
+    exit;
+}
+$order_author = (int) $post->post_author;
+$is_admin_or_shop = in_array( 'administrator', (array) $current_user->roles ) || in_array( 'shop', (array) $current_user->roles );
+$is_own_order = $order_author > 0 && $order_author === (int) $current_user->ID;
+if ( ! $is_admin_or_shop && ! $is_own_order ) {
     wp_redirect( home_url() );
     exit;
 }
