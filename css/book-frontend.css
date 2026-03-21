@@ -1818,13 +1818,13 @@ table.dsmart-table thead th,.dsmart-table table thead th{
     margin-bottom: 10px;
 }
 .cart-variable h5{
-    font-size: 18px;
-    line-height: 24px;
-    font-weight: 600;
+font-size: 15px;
+  line-height: 0px;
+  font-weight: 600;
     color: #000 !important;
 }
 .cart-variable p, .cart-variable ul{
-    font-size: 18px;
+    font-size: 16px;
     line-height: 24px;
 }
 .cart-variable ul{
@@ -1940,7 +1940,7 @@ h2{
 }
 
 #dsmart-cart-table{
-    width: 100%;
+    width: 100% !important;
 }
 .dark-style .dsmart-cart-table thead th{
     background-color: #fff;

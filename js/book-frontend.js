@@ -93,13 +93,13 @@ jQuery(document).ready(function ($) {
 	});
 
   
-  $(".variable-product").click(function (e) {
-    var p = e.target;
-    var self = p.closest('.inner');
-    if(!self){
-      $(this).hide();
-    }
-  });
+  // $(".variable-product").click(function (e) {
+  //   var p = e.target;
+  //   var self = p.closest('.inner');
+  //   if(!self){
+  //     $(this).hide();
+  //   }
+  // });
 
   $(".items-time-details").click(function (e) {
     var p = e.target;
