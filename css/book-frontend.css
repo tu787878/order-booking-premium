@@ -1646,6 +1646,10 @@ table.dsmart-table thead th,.dsmart-table table thead th{
     color: #000 !important;
 }
 
+#footer{
+    display: none;
+}
+
 #footer .social-header-wrap ul li{
     color: black !important;
 }
@@ -1945,6 +1949,13 @@ h2{
     line-height: inherit !important;
 }
 
+.cart-page{
+    width: 80%;
+    padding-top: 30px;
+    padding-bottom: 45px;
+    margin: 0 auto;
+}
+
 .dark-style .dsmart-title{
     color: #fff !important;
 }
@@ -2060,6 +2071,11 @@ input[type=number] {
 .dsmart-table .quantity-wrap{
     display: inline-block;
 }
+
+.dsmart-table{
+    border: 1px solid rgba(255,255,255,.2) !important;
+}
+
 .list-product .item h3.title .no-item{
     font-size: 13px;
     color: #f30;
@@ -2541,6 +2557,10 @@ html, body {
 }
 .horizontal-category .owl-next::before{
     content: "";
+}
+
+hr{
+    display: none;
 }
 
 .owl-stage{
