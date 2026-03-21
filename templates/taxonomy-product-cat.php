@@ -361,61 +361,50 @@ if (get_option('homepage_popup') === "2"){
                                         $image_size = get_option('image_size', "220");
                                         $style = "width: " . $image_size . "px !important";
                                     ?>
-                                        <div class="item <?php echo $class_img; ?> food-item-wrap-outer" style="<?php echo $style;?>">
+                                        <div class="item <?php echo $class_img; ?>" style="<?php echo $style;?>">
                                             <?php
                                             $isExtra = $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']));
                                             $isSidedish = $meta['sidedish_name'] != null && !empty(array_filter($meta['sidedish_name']));
                                             $isVariable = $meta['quantity'] != null &&  !empty(array_filter($meta['quantity'])) && $meta['varialbe_price'] != null && !empty(array_filter($meta['varialbe_price']));
-                                            ?>
-                                            <div class="food-item-with-image">
-                                                <?php if ($url_img != "" && $dsmart_thumbnail != "1") : ?>
-                                                    <div class="food-item-image">
-                                                        <img loading="lazy" src="<?php echo $url_img; ?>" alt="<?php the_title(); ?>">
-                                                    </div>
-                                                <?php endif; ?>
-                                                
-                                                <div class="food-item-content">
-                                                    <div class="food-item-header">
-                                                        <h3 class="food-item-title">
+                                            if ($url_img != "" && $dsmart_thumbnail != "1") : ?><span class="thumb"><img loading="lazy" style="loading: lazy;" src="<?php echo $url_img; ?>" alt="<?php the_title(); ?>"></span><?php endif; ?>
+                                            <div class="desc">
+                                                <div class="content-wrap rowct">
+                                                    <div class="left-item">
+                                                        <h3 class="title">
                                                             <?php the_title(); ?>
-                                                            <?php if ($sharp != 0) : ?>
-                                                                <span class="sharp"><?php for ($i = 1; $i <= $sharp; $i++) { ?><img src="<?php echo BOOKING_ORDER_PATH . 'img/chili.png'; ?>" alt="" /><?php } ?></span>
-                                                            <?php endif; ?>
+                                                            <?php if ($sharp != 0) : ?><span class="sharp"><?php
+                                                                    for ($i = 1; $i <= $sharp; $i++) { ?>
+                                                                        <img src="<?php echo BOOKING_ORDER_PATH . 'img/chili.png'; ?>" alt="" />
+                                                                    <?php } ?></span><?php endif; ?>
                                                             <?php if ($vegetarian == '1') : ?>
                                                                 <span class="leaf"><img src="<?php echo BOOKING_ORDER_PATH . 'img/leaf.png'; ?>" alt="" /></span>
                                                             <?php endif; ?>
                                                         </h3>
-                                                        <div class="food-item-variations">
-                                                            <?php if (($dsmart_stock == "1" || ($dsmart_stock != "1" && $ds_status_product == "instock")) && $price != "") : ?>
-                                                                <span class="food-item-price"><?php echo ds_price_format_text($price); ?></span>
-                                                            <?php else : ?>
-                                                                <span class="food-item-price">Ausverkauft</span>
-                                                            <?php endif; ?>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="food-item-description">
-                                                        <?php echo get_the_excerpt(); ?>
                                                         <?php if ($desc != '') : ?>
-                                                            <br><small>(<?php echo $desc; ?>)</small>
-                                                        <?php endif; ?>
-                                                    </div>
-
-                                                    <div class="food-item-actions" style="margin-top: 10px;">
-                                                        <?php if (($dsmart_stock == "1" || ($dsmart_stock != "1" && $ds_status_product == "instock")) && $price != "") :
-                                                            if ($isExtra || $isVariable || $isSidedish ) : ?>
-                                                                <button type="button" class="option_selection_btn" data-id="<?php the_ID(); ?>">OPTIONEN AUSWÄHLEN</button>
-                                                            <?php else : ?>
-                                                                <button type="button" class="add-to-cart" data-id="<?php the_ID(); ?>">IN DEN WARENKORB</button>
+                                                                <sup style="color: white !important;font-size:13px">(<?php echo $desc; ?>)</sup>
                                                             <?php endif; ?>
+                                                        <div class="excerpt"><?php echo get_the_excerpt(); ?></div>
+                                                    </div>
+                                                    <div class="right-item">
+                                                        <?php if (($dsmart_stock == "1" || ($dsmart_stock != "1" && $ds_status_product == "instock")) && $price != "") :
+                                                            if ($isExtra || $isVariable || $isSidedish ) : 
+                                                                if(!$isVariable){ ?>
+                                                                    <div class="price"><span style="color:<?php echo $price_color ?> !important"><?php echo ds_price_format_text($price); ?></span></div>
+                                                                <?php }?>
+                                                                <button type="button" class="add-to-cart-copy option_selection_btn" style="color: <?php echo $price_color?> !important;border-color: <?php echo $button_color?> !important;" data-id="<?php the_ID(); ?>">OPTIONEN AUSWÄHLEN</button>
+                                                            <?php else : ?>
+                                                                <!-- <div class="price"><span style="color:<?php echo $price_color ?> !important"><?php echo ds_price_format_text($price); ?></span></div> -->
+                                                                <button type="button" class="add-to-cart" style="color: <?php echo $price_color?> !important;border-color: <?php echo $button_color?> !important;" data-id="<?php the_ID(); ?>"><?php echo ds_price_format_text($price); ?></button>
+                                                            <?php endif; ?>
+                                                        <?php else : ?> 
+                                                            <button type="button" class="add-to-cart" style="color: <?php echo $price_color?> !important;border-color: <?php echo $button_color?> !important;pointer-events: none;" data-id="<?php the_ID(); ?>">Ausverkauft</button>
                                                         <?php endif; ?>
                                                     </div>
                                                 </div>
-                                            </div>
                                                 
-                                            <?php 
-                                            if (($dsmart_stock == "1" || ($dsmart_stock != "1" && $ds_status_product == "instock")) && $price != "" && ($isExtra || $isVariable || $isSidedish)) : ?>
+                                                <?php 
 
+                                                if (($dsmart_stock == "1" || ($dsmart_stock != "1" && $ds_status_product == "instock")) && $price != "" && ($isExtra || $isVariable || $isSidedish)) : ?>
                                                     <div class="variable-product" id="variable_<?php echo the_ID();?>" style="display:none;">
                                                         <div class="inner">
                                                             <div class="modal-box">
