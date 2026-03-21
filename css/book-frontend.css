@@ -1938,6 +1938,10 @@ h2{
 .dark-style a.go-to-cart{
     color: #fff;
 }
+
+.dsmart-cart-table{
+    width: 100%;
+}
 .dark-style .dsmart-cart-table thead th{
     background-color: #fff;
     color: #000;
