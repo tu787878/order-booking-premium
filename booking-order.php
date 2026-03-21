@@ -3,7 +3,7 @@
 /**
  * Plugin Name: TCG Restaurant Shop Premium
  * Description: Restaurant Shop for delivery and take away
- * Version: 1.0.0.8
+ * Version: 1.0.1.0
  * License: GPLv2 or later
  */
 define('BOOKING_ORDER_PATH', plugin_dir_url(__FILE__));
@@ -216,6 +216,7 @@ function book_frontend_scripts()
     wp_enqueue_style('book-responsive.css', BOOKING_ORDER_PATH . 'css/book-responsive.css', array(), rand());
     wp_enqueue_style('nice-select-css.css', BOOKING_ORDER_PATH . 'css/nice-select.css', array(), rand());
     wp_enqueue_style('owl.carousel.min.css', BOOKING_ORDER_PATH . 'css/owl.carousel.min.css');
+    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
     wp_enqueue_style('bootstrap_icon_css', '//cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css');
 
     
