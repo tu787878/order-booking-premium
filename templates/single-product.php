@@ -27,7 +27,7 @@ $desc = dsmart_field('desc',get_the_ID());
 $sharp = intval(dsmart_field('sharp',get_the_ID()));
 get_header();
 $current_img = ""; ?>
-<div class="container">
+<div class="container dark-style">
 	<?php add_to_cart_notify($notify);
 	submit_comment_notify($comment_notify); ?>
 	<div class="dsmart-notify"></div>

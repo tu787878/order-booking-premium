@@ -30,14 +30,14 @@ if (isset($_GET['success']) && $_GET['success'] == '1') {
         }
         
         /* Dark mode styles */
-        .order_page.ds-thankyou-page .ds-thankyou h2, body.dark-style .order_page.ds-thankyou-page .ds-thankyou h6 {
+        .order_page.ds-thankyou-page .ds-thankyou h2, .dark-style .order_page.ds-thankyou-page .ds-thankyou h6 {
             color: #fff !important;
         }
         .order_page.ds-thankyou-page .ds-thankyou .dsmart-button {
             color: #fff !important;
         }
     </style>
-    <div class="order_page ds-thankyou-page">
+    <div class="order_page ds-thankyou-page dark-style">
         <div class="ds-thankyou">
             <h2><?php _e('Vielen Dank', 'dsmart'); ?></h2>
             <h6><?php _e('Ihre Bestellung war erfolgreich!', 'dsmart'); ?></h6>

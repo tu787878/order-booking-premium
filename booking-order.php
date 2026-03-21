@@ -215,6 +215,7 @@ function book_frontend_scripts()
     wp_enqueue_style('book-frontend.css', BOOKING_ORDER_PATH . 'css/book-frontend.css', array(), rand());
     wp_enqueue_style('book-responsive.css', BOOKING_ORDER_PATH . 'css/book-responsive.css', array(), rand());
     wp_enqueue_style('nice-select-css.css', BOOKING_ORDER_PATH . 'css/nice-select.css', array(), rand());
+    wp_enqueue_style('owl.carousel.min.css', BOOKING_ORDER_PATH . 'css/owl.carousel.min.css');
     wp_enqueue_style('bootstrap_icon_css', '//cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css');
 
     
@@ -226,8 +227,9 @@ function book_frontend_scripts()
     wp_enqueue_script('jquery.barrating.min.js', BOOKING_ORDER_PATH . 'js/jquery.barrating.min.js', array('jquery'), '3.8', true);
     wp_enqueue_script('nice-select-js.js', BOOKING_ORDER_PATH . 'js/jquery.nice-select.js', array('jquery'), '3.8', true);
     wp_enqueue_script('slick_js', BOOKING_ORDER_PATH . 'js/slick.js', array('jquery'), '3.8', true);
+    wp_enqueue_script('owl.carousel.min.js', BOOKING_ORDER_PATH . 'js/owl.carousel.min.js', array('jquery'), '2.3.4', true);
     wp_enqueue_script('print.min.js', BOOKING_ORDER_PATH . 'js/print.min.js', array('jquery'), '3.8', true);
-    wp_enqueue_script('main_js', BOOKING_ORDER_PATH . 'js/book-frontend.js', array('jquery'), rand(), true);
+    wp_enqueue_script('main_js', BOOKING_ORDER_PATH . 'js/book-frontend.js', array('jquery', 'owl.carousel.min.js'), rand(), true);
     if (is_tax('product-cat')) {
         $cat = get_queried_object();
         wp_localize_script(
@@ -4099,7 +4101,9 @@ add_action('template_redirect', 'kill_404_redirect_wpse_92103', 1);
 //change theme dark/light
 function dsmart_add_class_to_body($classes)
 {
-    $classes[] = 'dark-style';
+    if (is_tax('product-cat') || is_page_template('templates/cart-page.php') || is_page_template('templates/checkout-page.php') || is_page_template('templates/shop-page.php') || is_post_type_archive('orders') || is_singular('orders') || get_page_template_slug() === 'templates/cart-page.php' || get_page_template_slug() === 'templates/checkout-page.php' || get_page_template_slug() === 'templates/shop-page.php') {
+        $classes[] = 'dark-style';
+    }
     return $classes;
 }
 

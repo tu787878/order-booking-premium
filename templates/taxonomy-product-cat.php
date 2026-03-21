@@ -87,7 +87,7 @@ if (count($time1) > 0) {
 }
 ?>
 <style>
-body.dark-style .category_single{
+.dark-style .category_single{
     border: solid 1px rgb(255, 82, 82);
     background-color: black;
     color: white !important;
@@ -106,7 +106,7 @@ body.dark-style .category_single{
     color: white !important;
 }
 
-body.dark-style .category_single:hover{
+.dark-style .category_single:hover{
     background-color: rgb(255, 82, 82) !important;
     color: white !important;
 }
@@ -176,7 +176,7 @@ if (get_option('homepage_popup') === "2"){
 ?>
 
 
-<div class="tcg-container">
+<div class="tcg-container dark-style">
 <?php if ($show_notify == "on" && $notify_text != "") : ?>
         <div class="hihi">
             <div class="shop-notify">

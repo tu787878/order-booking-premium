@@ -13,7 +13,7 @@ if(!is_user_logged_in()){
 	}
 }
 get_header(); ?>
-	<div class="container">
+	<div class="container dark-style">
 		<div class="dsmart-row">
 			<div class="dsmart-col-3 shop-sidebar">
 				<ul class="shop-menu">

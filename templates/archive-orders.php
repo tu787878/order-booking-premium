@@ -21,7 +21,7 @@ get_header(); ?>
 <?php
 $mtheme_pagelayout_type="two-column";
 ?>
-<div class="contents-wrap float-left two-column">
+<div class="contents-wrap float-left two-column dark-style">
 <?php
 	if ( have_posts() )
 		the_post();
