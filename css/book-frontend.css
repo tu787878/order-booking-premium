@@ -2415,6 +2415,7 @@ body:not(.dark-style) .ds-searchform .cs-btn{
     flex-direction: column;
     align-items: center;
     position: sticky;
+    top: 0;
     z-index: 997;
     background-color: #000000ed;
     padding-top: 15px;
@@ -2441,7 +2442,7 @@ body:not(.dark-style) .ds-searchform .cs-btn{
 }
 
 .tcg-container{
-    overflow: clip;
+    overflow: visible;
 }
 
 .tcg-container.clearfix{
@@ -2555,4 +2556,9 @@ body:not(.dark-style) .ds-searchform .cs-btn{
   @media screen and (max-height: 450px) {
     .sidebar {padding-top: 15px;}
     .sidebar a {font-size: 18px;}
+  }
+
+
+  #header{
+    display: none;
   }
