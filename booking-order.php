@@ -228,8 +228,9 @@ function book_frontend_scripts()
     wp_enqueue_script('nice-select-js.js', BOOKING_ORDER_PATH . 'js/jquery.nice-select.js', array('jquery'), '3.8', true);
     wp_enqueue_script('slick_js', BOOKING_ORDER_PATH . 'js/slick.js', array('jquery'), '3.8', true);
     wp_enqueue_script('owl.carousel.min.js', BOOKING_ORDER_PATH . 'js/owl.carousel.min.js', array('jquery'), '2.3.4', true);
+    wp_enqueue_script('waypoints', 'https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js', array('jquery'), '4.0.1', true);
     wp_enqueue_script('print.min.js', BOOKING_ORDER_PATH . 'js/print.min.js', array('jquery'), '3.8', true);
-    wp_enqueue_script('main_js', BOOKING_ORDER_PATH . 'js/book-frontend.js', array('jquery', 'owl.carousel.min.js'), rand(), true);
+    wp_enqueue_script('main_js', BOOKING_ORDER_PATH . 'js/book-frontend.js', array('jquery', 'owl.carousel.min.js', 'waypoints'), rand(), true);
     if (is_tax('product-cat')) {
         $cat = get_queried_object();
         wp_localize_script(
