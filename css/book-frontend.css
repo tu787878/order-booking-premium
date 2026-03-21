@@ -2406,17 +2406,39 @@ body:not(.dark-style) .ds-searchform .cs-btn{
 }
 
 
-.main-container{
+/* Force parents to allow sticky children */
+html, body {
+    overflow: visible !important;
+}
+
+#page, #main, .site-main, .content-area, .site-content {
+    overflow: visible !important;
+}
+
+.tcg-container{
+    overflow: visible !important;
+}
+
+.main-container {
     display: flex;
+    overflow: visible !important;
+}
+
+#main-body {
+    transition: margin-left .5s;
+    width: 100%;
+    overflow: visible !important;
+    position: relative; /* Ensure it's a containing block */
 }
 
 .header{
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
-    z-index: 997;
+    z-index: 9999; /* Higher z-index to stay on top */
     background-color: #000000ed;
     padding-top: 15px;
     width: 100%;
@@ -2439,10 +2461,6 @@ body:not(.dark-style) .ds-searchform .cs-btn{
 
 .header .row img{
     max-height: 50px;
-}
-
-.tcg-container{
-    overflow: visible;
 }
 
 .tcg-container.clearfix{
@@ -2488,14 +2506,18 @@ body:not(.dark-style) .ds-searchform .cs-btn{
     width: 70%;
     max-width: 70%;
     margin: 10px;
-    list-style-type: none;
     background-color: black;
     border-radius: 15px;
-    padding: 5 50px;
-    .item{
-        color: white;
-        margin: 10px;
-    }
+    padding: 5px 50px;
+  }
+  .header .horizontal-category ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  .header .horizontal-category .item{
+    color: white;
+    margin: 10px;
   }
 
   
