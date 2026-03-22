@@ -1173,6 +1173,7 @@ h2{
 /* Thank you page (success only) */
 .order_page .ds-thankyou{
     text-align: center;
+    color: white;
 }
 .order_page .ds-thankyou .ds-thankyou-actions .ds-thankyou-back-btn{
     color: #fff;
@@ -1566,6 +1567,15 @@ span.required-symbol{
 .show-hide-time h3{
     text-align: center;
     font-size: 16px;
+}
+
+.checkout-page {
+    width: 85%;
+    margin: 0 auto;
+
+    .table{
+        width: 100%;
+    }
 }
 .shop-content *,.listing-inner *,.listing-inner,.shop-content,.checkout-page,.checkout-page *{
     box-sizing: border-box;
