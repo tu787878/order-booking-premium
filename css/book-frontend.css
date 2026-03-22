@@ -5,6 +5,14 @@
     opacity: 1;
 }
 
+.tcg-container, 
+.cart-page, 
+.checkout-page, 
+.order_page, 
+.shop-page {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
 .entry-content h1, .entry-content h3, .entry-content h2, .entry-content h5, .entry-content h4{
     color: #000 !important;
 }
@@ -434,7 +442,7 @@ html {
     /* padding-top: 25px; */
     float: left;
 
-    font-family: SegoeUI;
+    font-family: 'Open Sans', sans-serif;
 }
 .listing-inner .menu-menucard{
     width: 100%;
@@ -520,7 +528,7 @@ h2{
     font-size: 32px !important;
     letter-spacing: 1.5px;
     line-height: normal;
-    font-family: "Font Secondary",Arial,sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     margin-top: 20px;
 }
@@ -862,7 +870,7 @@ h2{
   .variable-product .inner .title {
     margin-top: 0;
     color: #333;
-    font-family: Tahoma, Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
   }
 
   .variable-product .inner sup {

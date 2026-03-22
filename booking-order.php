@@ -204,6 +204,7 @@ function load_wp_media_files($page)
 function book_frontend_scripts()
 {
     wp_enqueue_style('styles.css', BOOKING_ORDER_PATH . 'styles.css');
+    wp_enqueue_style('google-fonts-open-sans', 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
     wp_enqueue_style('ion.rangeSlider', BOOKING_ORDER_PATH . 'css/ion.rangeSlider.css');
     wp_enqueue_style('jquery.timepicker.min.css', BOOKING_ORDER_PATH . 'css/jquery.timepicker.min.css');
     wp_enqueue_style('ion.rangeSlider.skinFlat.css', BOOKING_ORDER_PATH . 'css/ion.rangeSlider.skinFlat.css');
