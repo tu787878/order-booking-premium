@@ -363,7 +363,7 @@ if (get_option('homepage_popup') === "2"){
                                     ?>
                                         <div class="item <?php echo $class_img; ?>" style="<?php echo $style;?>">
                                             <?php
-                                            $isExtra = $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']));
+                                            $isExtra = $meta['extra_name'] != null && !empty(array_filter($meta['extra_name']));
                                             $isSidedish = $meta['sidedish_name'] != null && !empty(array_filter($meta['sidedish_name']));
                                             $isVariable = $meta['quantity'] != null &&  !empty(array_filter($meta['quantity'])) && $meta['varialbe_price'] != null && !empty(array_filter($meta['varialbe_price']));
                                             if ($url_img != "" && $dsmart_thumbnail != "1") : ?><span class="thumb"><img loading="lazy" style="loading: lazy;" src="<?php echo $url_img; ?>" alt="<?php the_title(); ?>"></span><?php endif; ?>
@@ -452,11 +452,12 @@ if (get_option('homepage_popup') === "2"){
                                                                             echo '<h5 class="extra-title">Ihre Extras:</h5>';
                                                                             foreach ($meta['extra_name'] as $key => $extra) {
                                                                                 $extra_type = dsmart_field('extra_type' . ($key + 1));
-                                                                                if ($meta['extra_name'][$key] != null && $meta['extra_price'][$key] != null) :
+                                                                                if ($meta['extra_name'][$key] != null) :
+                                                                                    $extra_price_val = (isset($meta['extra_price']) && is_array($meta['extra_price']) && isset($meta['extra_price'][$key]) && $meta['extra_price'][$key] !== "") ? $meta['extra_price'][$key] : 0;
                                                                         ?>
                                                                                     <label class="custom-radio-checkbox rowct">
-                                                                                        <input class="ccenter" type="checkbox" name="extra_product" data-id="<?php echo get_the_ID() . '_' . ($key + 1) . '_extra'; ?>" data-quantity="<?php echo ($extra_type == 'tick') ? 1 : ''; ?>" data-price="<?php echo $meta['extra_price'][$key]; ?>">
-                                                                                        <span class="text"><?php echo $meta['extra_name'][$key] . ' (+' . ds_price_format_text($meta['extra_price'][$key]) . ')'; ?></span>
+                                                                                        <input class="ccenter" type="checkbox" name="extra_product" data-id="<?php echo get_the_ID() . '_' . ($key + 1) . '_extra'; ?>" data-quantity="<?php echo ($extra_type == 'tick') ? 1 : ''; ?>" data-price="<?php echo $extra_price_val; ?>">
+                                                                                        <span class="text"><?php echo $meta['extra_name'][$key] . ($extra_price_val ? ' (+' . ds_price_format_text($extra_price_val) . ')' : ''); ?></span>
                                                                                         <?php if ($extra_type != 'tick') : ?>
                                                                                             <div class="extra-quantity quantity-wrap flex-list">
                                                                                                 <button type="button" class="minus"><i class="fa fa-minus" aria-hidden="true"></i></button>

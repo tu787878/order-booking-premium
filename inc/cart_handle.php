@@ -65,7 +65,7 @@ function has_extra($value_item){
     $meta['extra_name'] = dsmart_field('extra_name',$product_id);
     $meta['extra_price'] = dsmart_field('extra_price',$product_id);
 
-    return isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']));
+    return isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name']));
 }
 
 function has_variable($value_item){
@@ -88,13 +88,15 @@ function get_extra_variable_info($value_item){
     $meta['extra_name'] = dsmart_field('extra_name',$product_id);
     $meta['extra_price'] = dsmart_field('extra_price',$product_id);
     $extra_price = 0;
-    if(isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']))):
+    if(isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name']))):
         $extra_info = json_decode(stripslashes($value_item['extra_info'])); 
         foreach ($extra_info as $extra_key => $extra_value) { 
             $extra_id = intval(explode('_', $extra_value->extra_id)[1])-1;
             $extra_quantity = $extra_value->extra_quantity;
-            $temp_price = $meta['extra_price'][$extra_id];
-            $temp_price = floatval($temp_price)*intval($extra_quantity);
+            $temp_price = 0;
+            if(isset($meta['extra_price']) && is_array($meta['extra_price']) && isset($meta['extra_price'][$extra_id]) && $meta['extra_price'][$extra_id] !== ""){
+                $temp_price = floatval($meta['extra_price'][$extra_id]) * intval($extra_quantity);
+            }
             $extra_price = $extra_price + $temp_price;
         }
     else:

@@ -195,7 +195,7 @@ get_header(); ?>
                                     $data_item .= '<div class="section" style="margin-bottom: 10px;padding-bottom: 10px;border-bottom: 1px dashed #000;">';
                                     $data_item .= '<p style="line-height: 1.3;margin: 0;text-align: center;"><b>Produkt: '.$value['quantity'].' x '.$value['title'].'</b></p>';
                                     $isSidedish = isset($value['sidedish_info']) && $value['sidedish_info'] != null && $meta['sidedish_name'] != null && !empty(array_filter($meta['sidedish_name']));
-                                    $isExtra = isset($value['extra_info']) && $value['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']));
+                                    $isExtra = isset($value['extra_info']) && $value['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name']));
                                     $isVariable = isset($value['variable_id']) && $meta['quantity'] != null && !empty(array_filter($meta['quantity'])) && $meta['varialbe_price'] != null && !empty(array_filter($meta['varialbe_price']));
                                     if($isVariable || $isExtra || $isSidedish):
                                         $data_item .= '<p style="line-height: 1.3;margin: 0;text-align: center;">AUSGEWÄHLTE PRODUKT</p>';
@@ -216,7 +216,8 @@ get_header(); ?>
                                             foreach ($extra_info as $extra_key => $extra_value) { 
                                                 $extra_id = intval(explode('_', $extra_value->extra_id)[1])-1;
                                                 $extra_quantity = $extra_value->extra_quantity; 
-                                                $extra_text .= '<li>'. $meta['extra_name'][$extra_id] .'(+'. ds_price_format_text($meta['extra_price'][$extra_id]) .') x ' . $extra_quantity .'</li>';                              
+												$extra_price_val = (isset($meta['extra_price']) && is_array($meta['extra_price']) && isset($meta['extra_price'][$extra_id]) && $meta['extra_price'][$extra_id] !== "") ? $meta['extra_price'][$extra_id] : 0;
+												$extra_text .= '<li>'. $meta['extra_name'][$extra_id] . ($extra_price_val ? '(+'. ds_price_format_text($extra_price_val) .')' : '') . ' x ' . $extra_quantity .'</li>';                              
                                            } 
                                             $extra_text .= '</ul>';
                                         else:

@@ -179,10 +179,10 @@ function product_info_display() {
 						</tfoot>
 						<tbody>
 							<?php $a=1;
-							if($meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']))):
+							if($meta['extra_name'] != null && !empty(array_filter($meta['extra_name']))):
 								foreach($meta['extra_name'] as $index => $extra_val ) : 
 									$extra_type = dsmart_field('extra_type'.$a);
-									if($meta['extra_name'][$index] != null && $meta['extra_price'][$index] != null):	?>
+									if($meta['extra_name'][$index] != null):	?>
 										<tr class="fields-group">
 											<td><input type='text' name='extra_name[]' class='widefat' value="<?php echo esc_attr($meta['extra_name'][$index]); ?>" /></td>
 											<td>
@@ -195,7 +195,7 @@ function product_info_display() {
 													<?php echo __("Tick and choose quantity","dsmart"); ?>
 												</label>
 											</td>
-											<td><input type="text" name="extra_price[]" class="widefat" value="<?php echo esc_attr($meta['extra_price'][$index]); ?>" /></td>
+											<td><input type="text" name="extra_price[]" class="widefat" value="<?php echo esc_attr(isset($meta['extra_price'][$index]) ? $meta['extra_price'][$index] : ''); ?>" /></td>
 											<td class="remove-td"><a href="javascript:void()" class="dsmart-remove-fields"><?php _e('x'); ?></a></td>
 										</tr>
 								<?php endif; $a++; endforeach;
@@ -688,7 +688,7 @@ function orders_info_display() {
                     $meta['extra_name'] = dsmart_field('extra_name',$product_id);
                     $meta['extra_price'] = dsmart_field('extra_price',$product_id);
 					$isSidedish = isset($value['sidedish_info']) && $value['sidedish_info'] != null && $meta['sidedish_name'] != null && !empty(array_filter($meta['sidedish_name']));
-					$isExtra = isset($value['extra_info']) && $value['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']));
+					$isExtra = isset($value['extra_info']) && $value['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name']));
 					$isVariable = isset($value['variable_id']) && $meta['quantity'] != null && !empty(array_filter($meta['quantity'])) && $meta['varialbe_price'] != null && !empty(array_filter($meta['varialbe_price']));
                      if($isVariable || $isExtra || $isSidedish):
                         $variable_id = intval(explode('_', $value['variable_id'])[1])-1;
@@ -707,7 +707,8 @@ function orders_info_display() {
                             foreach ($extra_info as $extra_key => $extra_value) { 
                                 $extra_id = intval(explode('_', $extra_value->extra_id)[1])-1;
                                 $extra_quantity = $extra_value->extra_quantity; 
-                                $extra_text .= '<li>'. $meta['extra_name'][$extra_id] .'(+'. ds_price_format_text($meta['extra_price'][$extra_id]) .') x ' . $extra_quantity .'</li>';                                   
+								$extra_price_val = (isset($meta['extra_price']) && is_array($meta['extra_price']) && isset($meta['extra_price'][$extra_id]) && $meta['extra_price'][$extra_id] !== "") ? $meta['extra_price'][$extra_id] : 0;
+								$extra_text .= '<li>'. $meta['extra_name'][$extra_id] . ($extra_price_val ? '(+'. ds_price_format_text($extra_price_val) .')' : '') . ' x ' . $extra_quantity .'</li>';
                            } 
                             $extra_text .= '</ul>';
                         else:

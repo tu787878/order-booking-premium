@@ -1505,13 +1505,15 @@ function checkout_cart()
 				endif;
 
 				$extra_price = 0;
-				if (isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']))) :
+				if (isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name']))) :
 					$extra_info = json_decode(stripslashes($value_item['extra_info']));
 					foreach ($extra_info as $extra_key => $extra_value) {
 						$extra_id = intval(explode('_', $extra_value->extra_id)[1]) - 1;
 						$extra_quantity = $extra_value->extra_quantity;
-						$temp_price = $meta['extra_price'][$extra_id];
-						$temp_price = floatval($temp_price) * intval($extra_quantity);
+						$temp_price = 0;
+						if (isset($meta['extra_price']) && is_array($meta['extra_price']) && isset($meta['extra_price'][$extra_id]) && $meta['extra_price'][$extra_id] !== "") {
+							$temp_price = floatval($meta['extra_price'][$extra_id]) * intval($extra_quantity);
+						}
 						$extra_price = $extra_price + $temp_price;
 					}
 				endif;
@@ -2388,17 +2390,18 @@ function ajax_print_order()
 			else :
 				$variable_text = '';
 			endif;
-			if (isset($value['extra_info']) && $value['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']))) :
+			if (isset($value['extra_info']) && $value['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name']))) :
 				$extra_info = json_decode(stripslashes($value['extra_info']));
 				$extra_text = __('Extra: ', 'dsmart');
 				$a = 1;
 				foreach ($extra_info as $extra_key => $extra_value) {
 					$extra_id = intval(explode('_', $extra_value->extra_id)[1]) - 1;
 					$extra_quantity = $extra_value->extra_quantity;
+					$extra_price_val = (isset($meta['extra_price']) && is_array($meta['extra_price']) && isset($meta['extra_price'][$extra_id]) && $meta['extra_price'][$extra_id] !== "") ? $meta['extra_price'][$extra_id] : 0;
 					if ($a == 1) :
-						$extra_text .=  $meta['extra_name'][$extra_id] . '(' . cs_ds_price_format_text_with_symbol($meta['extra_price'][$extra_id], $currency) . ') x ' . $extra_quantity;
+						$extra_text .=  $meta['extra_name'][$extra_id] . ($extra_price_val ? '(' . cs_ds_price_format_text_with_symbol($extra_price_val, $currency) . ')' : '') . ' x ' . $extra_quantity;
 					else :
-						$extra_text .= ', ' . $meta['extra_name'][$extra_id] . '(' . cs_ds_price_format_text_with_symbol($meta['extra_price'][$extra_id], $currency) . ') x ' . $extra_quantity;
+						$extra_text .= ', ' . $meta['extra_name'][$extra_id] . ($extra_price_val ? '(' . cs_ds_price_format_text_with_symbol($extra_price_val, $currency) . ')' : '') . ' x ' . $extra_quantity;
 					endif;
 					$a++;
 				}

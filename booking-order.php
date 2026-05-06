@@ -987,13 +987,15 @@ function ds_get_cart_total_item($cart = null)
             $meta['sidedish_name'] = dsmart_field('sidedish_name', $product_id);
             $meta['sidedish_price'] = dsmart_field('sidedish_price', $product_id);
             $extra_price = 0;
-            if (isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']))) :
+            if (isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name']))) :
                 $extra_info = json_decode(stripslashes($value_item['extra_info']));
                 foreach ($extra_info as $extra_key => $extra_value) {
                     $extra_id = intval(explode('_', $extra_value->extra_id)[1]) - 1;
                     $extra_quantity = $extra_value->extra_quantity;
-                    $temp_price = $meta['extra_price'][$extra_id];
-                    $temp_price = floatval($temp_price) * intval($extra_quantity);
+                    $temp_price = 0;
+                    if (isset($meta['extra_price']) && is_array($meta['extra_price']) && isset($meta['extra_price'][$extra_id]) && $meta['extra_price'][$extra_id] !== "") {
+                        $temp_price = floatval($meta['extra_price'][$extra_id]) * intval($extra_quantity);
+                    }
                     $extra_price = $extra_price + $temp_price;
                 }
             else :
@@ -1054,13 +1056,15 @@ function ds_get_cart_total_item_use_coupon($cart = null)
                 $meta['extra_name'] = dsmart_field('extra_name', $product_id);
                 $meta['extra_price'] = dsmart_field('extra_price', $product_id);
                 $extra_price = 0;
-                if (isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']))) :
+                if (isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name']))) :
                     $extra_info = json_decode(stripslashes($value_item['extra_info']));
                     foreach ($extra_info as $extra_key => $extra_value) {
                         $extra_id = intval(explode('_', $extra_value->extra_id)[1]) - 1;
                         $extra_quantity = $extra_value->extra_quantity;
-                        $temp_price = $meta['extra_price'][$extra_id];
-                        $temp_price = floatval($temp_price) * intval($extra_quantity);
+                        $temp_price = 0;
+                        if (isset($meta['extra_price']) && is_array($meta['extra_price']) && isset($meta['extra_price'][$extra_id]) && $meta['extra_price'][$extra_id] !== "") {
+                            $temp_price = floatval($meta['extra_price'][$extra_id]) * intval($extra_quantity);
+                        }
                         $extra_price = $extra_price + $temp_price;
                     }
                 else :
@@ -1128,13 +1132,15 @@ function ds_get_vat_total_item($cart = null)
             $meta['extra_name'] = dsmart_field('extra_name', $product_id);
             $meta['extra_price'] = dsmart_field('extra_price', $product_id);
             $extra_price = 0;
-            if (isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']))) :
+            if (isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name']))) :
                 $extra_info = json_decode(stripslashes($value_item['extra_info']));
                 foreach ($extra_info as $extra_key => $extra_value) {
                     $extra_id = intval(explode('_', $extra_value->extra_id)[1]) - 1;
                     $extra_quantity = $extra_value->extra_quantity;
-                    $temp_price = $meta['extra_price'][$extra_id];
-                    $temp_price = floatval($temp_price) * intval($extra_quantity);
+                    $temp_price = 0;
+                    if (isset($meta['extra_price']) && is_array($meta['extra_price']) && isset($meta['extra_price'][$extra_id]) && $meta['extra_price'][$extra_id] !== "") {
+                        $temp_price = floatval($meta['extra_price'][$extra_id]) * intval($extra_quantity);
+                    }
                     $extra_price = $extra_price + $temp_price;
                 }
             else :
@@ -1200,13 +1206,15 @@ function ds_get_cart_total_quantity($cart = null)
             $meta['extra_name'] = dsmart_field('extra_name', $product_id);
             $meta['extra_price'] = dsmart_field('extra_price', $product_id);
             $extra_price = 0;
-            if (isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']))) :
+            if (isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name']))) :
                 $extra_info = json_decode(stripslashes($value_item['extra_info']));
                 foreach ($extra_info as $extra_key => $extra_value) {
                     $extra_id = intval(explode('_', $extra_value->extra_id)[1]) - 1;
                     $extra_quantity = $extra_value->extra_quantity;
-                    $temp_price = $meta['extra_price'][$extra_id];
-                    $temp_price = floatval($temp_price) * intval($extra_quantity);
+                    $temp_price = 0;
+                    if (isset($meta['extra_price']) && is_array($meta['extra_price']) && isset($meta['extra_price'][$extra_id]) && $meta['extra_price'][$extra_id] !== "") {
+                        $temp_price = floatval($meta['extra_price'][$extra_id]) * intval($extra_quantity);
+                    }
                     $extra_price = $extra_price + $temp_price;
                 }
             else :
@@ -1251,13 +1259,15 @@ function ds_get_real_cart_total_quantity($cart = null)
             $meta['extra_name'] = dsmart_field('extra_name', $product_id);
             $meta['extra_price'] = dsmart_field('extra_price', $product_id);
             $extra_price = 0;
-            if (isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']))) :
+            if (isset($value_item['extra_info']) && $value_item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name']))) :
                 $extra_info = json_decode(stripslashes($value_item['extra_info']));
                 foreach ($extra_info as $extra_key => $extra_value) {
                     $extra_id = intval(explode('_', $extra_value->extra_id)[1]) - 1;
                     $extra_quantity = $extra_value->extra_quantity;
-                    $temp_price = $meta['extra_price'][$extra_id];
-                    $temp_price = floatval($temp_price) * intval($extra_quantity);
+                    $temp_price = 0;
+                    if (isset($meta['extra_price']) && is_array($meta['extra_price']) && isset($meta['extra_price'][$extra_id]) && $meta['extra_price'][$extra_id] !== "") {
+                        $temp_price = floatval($meta['extra_price'][$extra_id]) * intval($extra_quantity);
+                    }
                     $extra_price = $extra_price + $temp_price;
                 }
             else :
@@ -1964,7 +1974,7 @@ function send_mail_after_order($order_id)
             
             $data_item .= '<div class="section" style="margin-bottom: 10px;padding-bottom: 10px;border-bottom: 1px dashed #000;">';
             
-            $isExtra = isset($item['extra_info']) && $item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']));
+            $isExtra = isset($item['extra_info']) && $item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name']));
             $isSidedish = isset($item['sidedish_info']) && $item['sidedish_info'] != null && $meta['sidedish_name'] != null && !empty(array_filter($meta['sidedish_name']));
             $isVariable = isset($item['variable_id']) && $meta['quantity'] != null && !empty(array_filter($meta['quantity'])) && $meta['varialbe_price'] != null && !empty(array_filter($meta['varialbe_price']));
             
@@ -2248,7 +2258,7 @@ function send_mail_after_order($order_id)
                     $data_pool .= '<div class="section" style="margin-bottom: 10px;padding-bottom: 10px;border-bottom: 1px dashed #000;">';
                     $data_pool .= '<p style="line-height: 1.3;margin: 0;text-align: center;"><b>' . $item['quantity'] . 'x ' . $item['title'] . '</b> - ' . ds_price_format_text_with_symbol($item['price'], $currency) . '</p>';
                     $isSidedish = isset($item['sidedish_info']) && $item['sidedish_info'] != null && $meta['sidedish_name'] != null && !empty(array_filter($meta['sidedish_name']));
-                    $isExtra = isset($item['extra_info']) && $item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name'])) && $meta['extra_price'] != null && !empty(array_filter($meta['extra_price']));
+                    $isExtra = isset($item['extra_info']) && $item['extra_info'] != null && $meta['extra_name'] != null && !empty(array_filter($meta['extra_name']));
                     $isVariable = isset($item['variable_id']) && $meta['quantity'] != null && !empty(array_filter($meta['quantity'])) && $meta['varialbe_price'] != null && !empty(array_filter($meta['varialbe_price']));
                     if ($isExtra || $isVariable || $isSidedish) :
                         $variable_id = intval(explode('_', $item['variable_id'])[1]) - 1;
