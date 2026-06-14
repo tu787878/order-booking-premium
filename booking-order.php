@@ -3,7 +3,7 @@
 /**
  * Plugin Name: TCG Restaurant Shop Premium
  * Description: Restaurant Shop for delivery and take away
- * Version: 1.0.1.1
+ * Version: 1.0.1.2
  * License: GPLv2 or later
  */
 define('BOOKING_ORDER_PATH', plugin_dir_url(__FILE__));
@@ -3469,10 +3469,26 @@ function create_new_order($data, $status = 'processing', $transaction_id = null)
     ));
     $show_second_number = get_option('show_second_number');
     if ($show_second_number == "1") {
+        global $wpdb;
         $current_date = date('Ymd');
-        $total_order_in_date = (get_option('total_order_' . $current_date) != "") ? intval(get_option('total_order_' . $current_date)) : 0;
-        $total_order_in_date = $total_order_in_date + 1;
-        update_option('total_order_' . $current_date, $total_order_in_date);
+        $option_name = 'total_order_' . $current_date;
+        $option_row = $wpdb->get_row(
+            $wpdb->prepare("SELECT option_id, option_value FROM {$wpdb->options} WHERE option_name = %s LIMIT 1", $option_name)
+        );
+        if ($option_row) {
+            $wpdb->query(
+                $wpdb->prepare(
+                    "UPDATE {$wpdb->options} SET option_value = option_value + 1 WHERE option_name = %s",
+                    $option_name
+                )
+            );
+        } else {
+            $wpdb->insert($wpdb->options, array('option_name' => $option_name, 'option_value' => 1, 'autoload' => 'no'));
+        }
+        $total_order_in_date = (int) $wpdb->get_var(
+            $wpdb->prepare("SELECT option_value FROM {$wpdb->options} WHERE option_name = %s LIMIT 1", $option_name)
+        );
+        wp_cache_delete($option_name, 'options');
         add_post_meta($order_id, 'second_order_number', $total_order_in_date);
     }
     $item = array();
