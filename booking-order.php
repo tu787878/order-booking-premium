@@ -3,7 +3,7 @@
 /**
  * Plugin Name: TCG Restaurant Shop Premium
  * Description: Restaurant Shop for delivery and take away
- * Version: 1.0.1.2
+ * Version: 1.0.1.3
  * License: GPLv2 or later
  */
 define('BOOKING_ORDER_PATH', plugin_dir_url(__FILE__));
@@ -99,6 +99,16 @@ function book_posts_stickiness( $column, $post_id ) {
 	if ($column == 'total'){
 		 echo "€".get_post_meta( $post_id, 'total', true );
     }
+    if ($column == 'shipping_method'){
+        $shipping_method = get_post_meta( $post_id, 'shipping_method', true );
+    if($shipping_method == 'shipping'){
+        echo '<span class="shipping-badge delivery">Lieferung</span>';
+    } else if($shipping_method == 'direct'){
+        echo '<span class="shipping-badge pickup">Abholung</span>';
+    } else {
+        echo '-';
+    }
+}
 	   
 }
 add_action( 'manage_orders_posts_custom_column' , 'book_posts_stickiness', 10, 2 );
@@ -111,11 +121,88 @@ function orders_filter_posts_columns( $columns) {
       'bestellnummer' => __( 'Bestellnummer' ),
       'email' => __( 'Email' ),
       'telefon' => __( 'Telefon' ),
+      'shipping_method' => __( 'Lieferung/Abholung' ),
       'total' => __( 'Gesamtsumme' ),
       'date' => __( 'Datum' ),
     );
 
   return $columns;
+}
+
+
+// Make shipping_method column sortable
+add_filter( 'manage_edit-orders_sortable_columns', 'orders_sortable_columns' );
+function orders_sortable_columns( $columns ) {
+	$columns['shipping_method'] = 'shipping_method';
+	return $columns;
+}
+
+// Handle sorting by shipping_method
+add_filter( 'request', 'orders_sortable_orderby' );
+function orders_sortable_orderby( $vars ) {
+	if ( isset( $vars['orderby'] ) && 'shipping_method' === $vars['orderby'] ) {
+		$vars['meta_key'] = 'shipping_method';
+		$vars['orderby'] = 'meta_value';
+	}
+	return $vars;
+}
+
+// Add filter dropdown for shipping method
+add_action( 'restrict_manage_posts', 'orders_shipping_method_filter' );
+function orders_shipping_method_filter() {
+	global $typenow, $wp_query;
+	
+    // Check if we're on the orders post type page
+	if ( 'orders' !== $typenow ) {
+		return;
+	}
+	
+	$shipping_method = isset( $_GET['shipping_method_filter'] ) ? sanitize_text_field( $_GET['shipping_method_filter'] ) : '';
+	?>
+	<select name="shipping_method_filter" id="shipping_method_filter">
+		<option value="">Alle Lieferungsmethoden</option>
+		<option value="shipping" <?php selected( $shipping_method, 'shipping' ); ?>>Lieferung</option>
+		<option value="direct" <?php selected( $shipping_method, 'direct' ); ?>>Abholung</option>
+	</select>
+	<?php
+    	
+	echo '<select name="shipping_method_filter" id="shipping_method_filter" style="margin-left: 10px; padding: 5px 10px;">';
+	echo '<option value="">— Alle Lieferungsmethoden —</option>';
+	echo '<option value="shipping"' . selected( $shipping_method, 'shipping', false ) . '>Lieferung</option>';
+	echo '<option value="direct"' . selected( $shipping_method, 'direct', false ) . '>Abholung</option>';
+	echo '</select>';
+}
+
+// Apply shipping method filter to query
+add_filter( 'parse_query', 'orders_shipping_method_filter_query', 10, 1 );
+function orders_shipping_method_filter_query( $query ) {
+	// Only apply in admin
+	if ( ! is_admin() ) {
+		return;
+	}
+	
+	// Only apply to orders post type
+	if ( ! isset( $query->query_vars['post_type'] ) || 'orders' !== $query->query_vars['post_type'] ) {
+		return;
+	}
+	
+	// Check if filter parameter exists
+	if ( ! isset( $_GET['shipping_method_filter'] ) || empty( $_GET['shipping_method_filter'] ) ) {
+		return;
+	}
+	
+	$shipping_method = sanitize_text_field( $_GET['shipping_method_filter'] );
+	
+	// Build meta query
+	$meta_query = array(
+		array(
+			'key'     => 'shipping_method',
+			'value'   => $shipping_method,
+			'compare' => '='
+		)
+	);
+	
+	$query->set( 'meta_query', $meta_query );
 }
 
 
@@ -2156,6 +2243,8 @@ function send_mail_after_order($order_id)
     $html_file .= '</b></p>';
     $html_file .= '<h2 style="line-height: 1.3;margin: 0;text-align: center;">' . ucfirst($method_text) . '</h2>';
     $html_file .= '</div>';
+    $order_placed_at = get_the_date('d.m.Y', $order_id) . ' ' . get_the_time('H:i:s', $order_id);
+    $html_file .= '<div style="margin-top: 10px;padding-top: 6px;border-top: 1px dashed #000;text-align: center;"><p style="font-size: 7px;line-height: 1.4;margin: 0;color: #555;">Bestellzeitpunkt: ' . $order_placed_at . '</p></div>';
     $html_file .= '</body> </html>';
     $random_val = "order" . $order_id;
     //create example
@@ -2316,7 +2405,8 @@ function send_mail_after_order($order_id)
                     $data_pool .= '</div>';
                 }
             }
-            $attachments[] = create_pool($pool, $random_val, $i++, $total_pool, $show_second_number, $second_order_number, $customer_name1, $customer_name2, $data_pool, $order_time_info2);
+            $order_placed_at_pool = get_the_date('d.m.Y', $order_id) . ' ' . get_the_time('H:i:s', $order_id);
+            $attachments[] = create_pool($pool, $random_val, $i++, $total_pool, $show_second_number, $second_order_number, $customer_name1, $customer_name2, $data_pool, $order_time_info2, $order_placed_at_pool);
         }
     }
 
@@ -2362,7 +2452,7 @@ function order_time_info2($shipping_method, $user_location, $order_date, $user_d
     return $html_file;
 }
 
-function create_pool($pool, $order_id, $index, $total, $show_second_number, $second_order_number, $customer_name1, $customer_name2, $data_pool, $order_time_info)
+function create_pool($pool, $order_id, $index, $total, $show_second_number, $second_order_number, $customer_name1, $customer_name2, $data_pool, $order_time_info, $order_placed_at = '')
 {
 $html_file = '<!DOCTYPE html> <html style="margin: 0;padding: 0;"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> </head> <body style="padding: 0px 15px 0px 15px;"> <div style="margin-bottom: 10px;padding-bottom: 10px;border-bottom: 1px dashed #000;"> <h3 style="text-align: center;margin-top: 0;margin-bottom: 10px;">'. $pool .' ('. $index .'/'. $total .')</h3>';
     if ($show_second_number == "1") {
@@ -2374,6 +2464,9 @@ $html_file = '<!DOCTYPE html> <html style="margin: 0;padding: 0;"> <head> <meta 
     $html_file .= '<h3 style="text-align: center;margin-top: 0;margin-bottom: 10px;">Bestellinformationen</h3>';
     $html_file .= '</div>';
     $html_file .= $data_pool;
+    if ($order_placed_at !== '') {
+        $html_file .= '<div style="margin-top: 10px;padding-top: 6px;border-top: 1px dashed #000;text-align: center;"><p style="font-size: 7px;line-height: 1.4;margin: 0;color: #555;">Bestellzeitpunkt: ' . $order_placed_at . '</p></div>';
+    }
     $html_file .= '</body> </html>';
 
 
