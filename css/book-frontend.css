@@ -5,6 +5,67 @@
     opacity: 1;
 }
 
+.white-style .current_category_box{
+    border: solid 1px #d7d7d7 !important;
+    background-color: #ffffff !important;
+    color: #222222 !important;
+    opacity: 1;
+}
+
+.white-style .tcg-container,
+.white-style .cart-page,
+.white-style .checkout-page,
+.white-style .order_page,
+.white-style .shop-page,
+.white-style .contents-wrap,
+.white-style .dsmart-table,
+.white-style .dsmart-section,
+.white-style .dsmart-row,
+.white-style .dsmart-col-6 {
+    background-color: #ffffff !important;
+    color: #222222 !important;
+}
+
+.white-style .entry-content h1,
+.white-style .entry-content h2,
+.white-style .entry-content h3,
+.white-style .entry-content h4,
+.white-style .entry-content h5,
+.white-style .dsmart-title,
+.white-style label,
+.white-style .shop-menu a {
+    color: #111111 !important;
+}
+
+.white-style .footer-container-wrap{
+    background-color: #ffffff !important;
+}
+
+.white-style .line-logo{
+    border-bottom: 1px dotted #d7d7d7 !important;
+}
+
+.white-style .category_popuptext{
+    background-color: #ffffff;
+    color: #222222;
+    border: solid 1px #d7d7d7 !important;
+}
+
+.white-style .dsmart-button,
+.white-style .ds-thankyou .dsmart-button {
+    color: #ffffff !important;
+}
+
+.white-style .dsmart-field,
+.white-style .dsmart-table table,
+.white-style .dsmart-table td,
+.white-style .dsmart-table th,
+.white-style .dsmart-table tr {
+    background-color: #ffffff !important;
+    color: #222222 !important;
+    border-color: #d7d7d7 !important;
+}
+
 .tcg-container, 
 .cart-page, 
 .checkout-page, 

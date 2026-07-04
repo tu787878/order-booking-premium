@@ -87,10 +87,16 @@ if (count($time1) > 0) {
 }
 ?>
 <style>
-.dark-style .category_single{
+.dark-style .category_single,
+.white-style .category_single{
     border: solid 1px rgb(255, 82, 82);
     background-color: black;
     color: white !important;
+}
+.white-style .category_single{
+    background-color: #ffffff;
+    color: #222222 !important;
+    border-color: #d7d7d7;
 }
 .category_single{
     border-bottom: solid 1px #dfdfdf;
@@ -106,7 +112,8 @@ if (count($time1) > 0) {
     color: white !important;
 }
 
-.dark-style .category_single:hover{
+.dark-style .category_single:hover,
+.white-style .category_single:hover{
     background-color: rgb(255, 82, 82) !important;
     color: white !important;
 }
@@ -176,7 +183,7 @@ if (get_option('homepage_popup') === "2"){
 ?>
 
 
-<div class="tcg-container dark-style">
+<div class="tcg-container <?php echo dsmart_is_white_theme_enabled() ? 'white-style' : 'dark-style'; ?>">
 <?php if ($show_notify == "on" && $notify_text != "") : ?>
         <div class="hihi">
             <div class="shop-notify">

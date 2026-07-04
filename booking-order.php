@@ -3,7 +3,7 @@
 /**
  * Plugin Name: TCG Restaurant Shop Premium
  * Description: Restaurant Shop for delivery and take away
- * Version: 1.0.1.3
+ * Version: 1.0.1.4
  * License: GPLv2 or later
  */
 define('BOOKING_ORDER_PATH', plugin_dir_url(__FILE__));
@@ -4221,10 +4221,22 @@ function kill_404_redirect_wpse_92103()
 add_action('template_redirect', 'kill_404_redirect_wpse_92103', 1);
 
 //change theme dark/light
+function dsmart_is_white_theme_enabled()
+{
+    $theme_mode = get_option('dsmart_theme_mode', 'dark');
+    if (isset($_GET['design']) && in_array(sanitize_key($_GET['design']), array('dark', 'white'), true)) {
+        $theme_mode = sanitize_key($_GET['design']);
+    }
+
+    return $theme_mode === 'white';
+}
+
 function dsmart_add_class_to_body($classes)
 {
-    if (is_tax('product-cat') || is_page_template('templates/cart-page.php') || is_page_template('templates/checkout-page.php') || is_page_template('templates/shop-page.php') || is_post_type_archive('orders') || is_singular('orders') || get_page_template_slug() === 'templates/cart-page.php' || get_page_template_slug() === 'templates/checkout-page.php' || get_page_template_slug() === 'templates/shop-page.php') {
-        $classes[] = 'dark-style';
+    $is_shop_page = is_tax('product-cat') || is_page_template('templates/cart-page.php') || is_page_template('templates/checkout-page.php') || is_page_template('templates/shop-page.php') || is_post_type_archive('orders') || is_singular('orders') || get_page_template_slug() === 'templates/cart-page.php' || get_page_template_slug() === 'templates/checkout-page.php' || get_page_template_slug() === 'templates/shop-page.php';
+
+    if ($is_shop_page) {
+        $classes[] = dsmart_is_white_theme_enabled() ? 'white-style' : 'dark-style';
     }
     return $classes;
 }

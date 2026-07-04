@@ -69,7 +69,7 @@ endif;
 $button_color = get_option('button_color', '#50aecc');
 $price_color = get_option('price_color', '#b28e2d');
 get_header(); ?>
-<div class="checkout-page container dark-style">
+<div class="checkout-page container <?php echo dsmart_is_white_theme_enabled() ? 'white-style' : 'dark-style'; ?>">
 	<?php if(count($cart) > 0 && count($shipping_info) > 0 && $shipping_check != false){ ?>
 		<div class="dsmart-notify"></div>
 		<div class="dsmart-section user-info">

@@ -13,7 +13,7 @@ if(!is_user_logged_in()){
 	}
 }
 get_header(); ?>
-	<div class="container dark-style">
+	<div class="container <?php echo dsmart_is_white_theme_enabled() ? 'white-style' : 'dark-style'; ?>">
 		<div class="dsmart-row">
 			<div class="dsmart-col-3 shop-sidebar">
 				<ul class="shop-menu">

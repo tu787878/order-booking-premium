@@ -87,6 +87,12 @@ function general_booking_setting()
 			$button_color = $_POST['button_color'];
 			update_option('button_color', $button_color, 'yes');
 
+			$theme_mode = isset($_POST['dsmart_theme_mode']) ? sanitize_key($_POST['dsmart_theme_mode']) : 'dark';
+			if (!in_array($theme_mode, array('dark', 'white'), true)) {
+				$theme_mode = 'dark';
+			}
+			update_option('dsmart_theme_mode', $theme_mode, 'yes');
+
 			$header_color = $_POST['header_color'];
 			update_option('header_color', $header_color, 'yes');
 
@@ -871,6 +877,7 @@ function general_booking_setting()
 	$image_size = get_option('image_size');
 	$button_color = get_option('button_color');
 	$header_color = get_option('header_color');
+	$dsmart_theme_mode = get_option('dsmart_theme_mode', 'dark');
 	$sidebar_color = get_option('sidebar_color');
 	$price_color = get_option('price_color');
 	$quantity_circle_color = get_option('quantity_circle_color');
@@ -1117,6 +1124,14 @@ function general_booking_setting()
 						<div class="form-group">
 							<label><?php _e('Button Color') ?></label>
 							<input type="text" name="button_color" class="coloris" value="<?php echo $button_color; ?>"/>
+						</div>
+
+						<div class="form-group">
+							<label><?php _e('Shop Design Mode') ?></label>
+							<select name="dsmart_theme_mode" class="widefat">
+								<option value="dark" <?php selected($dsmart_theme_mode, 'dark'); ?>>Dark</option>
+								<option value="white" <?php selected($dsmart_theme_mode, 'white'); ?>>White</option>
+							</select>
 						</div>
 
 						<div class="form-group">

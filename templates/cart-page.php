@@ -58,7 +58,7 @@ $button_color = get_option('button_color', '#50aecc');
 $price_color = get_option('price_color', '#b28e2d');
 $show_time_conflict = get_option('enable_display_conflicts', '0');
 get_header(); ?>
-<div class="cart-page container dark-style">
+<div class="cart-page container <?php echo dsmart_is_white_theme_enabled() ? 'white-style' : 'dark-style'; ?>">
 	<?php if(count($cart) > 0): ?>
 		<?php 
 			if($show_time_conflict === '1' && $conflicts != null && count($conflicts) >= 1){

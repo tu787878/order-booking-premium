@@ -37,7 +37,7 @@ if (isset($_GET['success']) && $_GET['success'] == '1') {
             color: #fff !important;
         }
     </style>
-    <div class="order_page ds-thankyou-page dark-style">
+    <div class="order_page ds-thankyou-page <?php echo dsmart_is_white_theme_enabled() ? 'white-style' : 'dark-style'; ?>">
         <div class="ds-thankyou">
             <h2><?php _e('Vielen Dank', 'dsmart'); ?></h2>
             <h6><?php _e('Ihre Bestellung war erfolgreich!', 'dsmart'); ?></h6>
