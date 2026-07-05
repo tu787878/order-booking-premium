@@ -127,6 +127,28 @@ if (count($time1) > 0) {
     display: inline-block;
     transition: 0.5s;
 }
+
+.white-style .menu-categories li a{
+    color: #222222 !important;
+}
+
+.white-style .menu-categories li.active a,
+.white-style .menu-categories li a:hover{
+    color: <?php echo $button_color; ?> !important;
+    border-bottom-color: <?php echo $button_color; ?>;
+}
+
+.white-style .category_single{
+    background-color: #ffffff;
+    color: #222222 !important;
+    border-color: #d7d7d7;
+}
+
+.white-style .category_single.active,
+.white-style .category_single:hover{
+    background-color: <?php echo $button_color; ?> !important;
+    color: #ffffff !important;
+}
 </style>
 <?php
 get_header(); 
