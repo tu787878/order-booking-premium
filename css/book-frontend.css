@@ -577,10 +577,22 @@ html {
 }
 
 /* White-theme specific overrides for interactive elements */
-.white-style .add-to-cart,
-.white-style .add-to-cart-copy{
+.white-style .add-to-cart{
     background-color: #ffffff !important;
-    color: var(--dsmart-button) !important; /* use configured button color */
+    color: var(--dsmart-price) !important; /* use configured price color for price button */
+    box-shadow: none !important;
+    border: 2px solid var(--dsmart-button) !important;
+    padding: 8px 18px !important;
+    line-height: 36px !important;
+    border-radius: 50px !important;
+    text-align: center !important;
+}
+
+.white-style .add-to-cart-copy,
+.white-style .add-to-cart-copy.option_selection_btn,
+.white-style .option_selection_btn{
+    background-color: #ffffff !important;
+    color: var(--dsmart-button) !important;
     box-shadow: none !important;
     border: 2px solid var(--dsmart-button) !important;
     padding: 8px 18px !important;
@@ -590,7 +602,9 @@ html {
 }
 
 .white-style .add-to-cart:hover,
-.white-style .add-to-cart-copy:hover{
+.white-style .add-to-cart-copy:hover,
+.white-style .add-to-cart-copy.option_selection_btn:hover,
+.white-style .option_selection_btn:hover{
     filter: brightness(0.98) !important;
 }
 
@@ -604,7 +618,6 @@ html {
 }
 
 /* Ensure option-selection and copy buttons inherit configured button color and show border */
-.white-style .add-to-cart,
 .white-style .add-to-cart-copy,
 .white-style .add-to-cart-copy.option_selection_btn,
 .white-style .option_selection_btn{
@@ -614,6 +627,9 @@ html {
 }
 
 .white-style .add-to-cart span,
+.white-style .add-to-cart{
+    color: var(--dsmart-price) !important;
+}
 .white-style .add-to-cart-copy span{
     color: var(--dsmart-button) !important;
 }
@@ -664,10 +680,17 @@ body.white-style .list-product .item{
 /* High-specificity fallback to force visible button and overlay borders/text */
 body.white-style .tcg-container button.add-to-cart,
 body.white-style .tcg-container .add-to-cart,
+body.white-style .tcg-container .quantity-submit .add-to-cart{
+    color: var(--dsmart-price) !important;
+    -webkit-text-fill-color: var(--dsmart-price) !important;
+    background: transparent !important;
+    border: 3px solid var(--dsmart-button) !important;
+    box-shadow: none !important;
+}
+
 body.white-style .tcg-container .add-to-cart-copy,
 body.white-style .tcg-container .option_selection_btn,
-body.white-style .tcg-container .add-to-cart-copy.option_selection_btn,
-body.white-style .tcg-container .quantity-submit .add-to-cart{
+body.white-style .tcg-container .add-to-cart-copy.option_selection_btn{
     color: var(--dsmart-button) !important;
     -webkit-text-fill-color: var(--dsmart-button) !important;
     background: transparent !important;
@@ -676,8 +699,14 @@ body.white-style .tcg-container .quantity-submit .add-to-cart{
 }
 
 body.white-style .tcg-container .add-to-cart *,
-body.white-style .tcg-container .add-to-cart-copy *{
+body.white-style .tcg-container .add-to-cart{
+    color: var(--dsmart-price) !important;
+    -webkit-text-fill-color: var(--dsmart-price) !important;
+}
+body.white-style .tcg-container .add-to-cart-copy *,
+body.white-style .tcg-container .add-to-cart-copy{
     color: var(--dsmart-button) !important;
+    -webkit-text-fill-color: var(--dsmart-button) !important;
 }
 
 body.white-style .tcg-container .variable-product .add-to-cart,
