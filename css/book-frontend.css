@@ -580,8 +580,13 @@ html {
 .white-style .add-to-cart,
 .white-style .add-to-cart-copy{
     background-color: #ffffff !important;
-    color: #222222 !important; /* force readable text in white theme */
+    color: var(--dsmart-button) !important; /* use configured button color */
     box-shadow: none !important;
+    border: 2px solid var(--dsmart-button) !important;
+    padding: 8px 18px !important;
+    line-height: 36px !important;
+    border-radius: 50px !important;
+    text-align: center !important;
 }
 
 .white-style .add-to-cart:hover,
@@ -593,6 +598,9 @@ html {
 .white-style .variable-product{
     background-color: rgba(255,255,255,0.98) !important;
     color: #222222 !important;
+    border: 2px solid var(--dsmart-price) !important; /* use configured price color */
+    border-radius: 8px !important;
+    padding: 12px !important;
 }
 .white-style .variable-product .inner{
     background-color: transparent !important;
@@ -2809,3 +2817,19 @@ hr{
   #header{
     display: none;
   }
+
+/* Strong fallback: ensure mobile menu/list is light in white theme */
+.white-style .menu-categories-wrapper,
+.white-style .mysidebar,
+.white-style .mySideBar,
+.white-style .menu-categories,
+.white-style .menu-category-list,
+.white-style .menu-categories ul,
+.white-style .menu-categories li{
+        background-color: #ffffff !important;
+        color: #222222 !important;
+}
+.white-style .menu-categories li a,
+.white-style .menu-category-list li a{
+        color: #222222 !important;
+}

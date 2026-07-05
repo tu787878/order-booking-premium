@@ -59,9 +59,27 @@ $dsmart_taxonomy_text = get_option('dsmart_taxonomy_text');
 $show_notify = get_option('show_notify');
 $notify_text = get_option('notify_text');
 
-$button_color = get_option('button_color', '#50aecc');
-$sidebar_color = get_option('sidebar_color', '#ff8000');
-$price_color = get_option('price_color', '#b28e2d');
+$opt_button = get_option('button_color');
+$opt_sidebar = get_option('sidebar_color');
+$opt_price = get_option('price_color');
+
+// Provide theme-specific defaults when option not set
+if (empty($opt_button)) {
+    $opt_button = dsmart_is_white_theme_enabled() ? '#ff8000' : '#50aecc';
+}
+if (empty($opt_price)) {
+    $opt_price = dsmart_is_white_theme_enabled() ? '#ff8000' : '#b28e2d';
+}
+if (empty($opt_sidebar)) {
+    $opt_sidebar = '#ff8000';
+}
+
+$button_color = $opt_button;
+$sidebar_color = $opt_sidebar;
+$price_color = $opt_price;
+
+// Expose CSS custom properties on the container using inline style
+$tcg_style = 'style="--dsmart-button: ' . esc_attr($button_color) . '; --dsmart-price: ' . esc_attr($price_color) . '; --dsmart-sidebar: ' . esc_attr($sidebar_color) . ';"';
 
 $check_time_open1 = true;
 $check_time_open2 = true;
@@ -205,7 +223,7 @@ if (get_option('homepage_popup') === "2"){
 ?>
 
 
-<div class="tcg-container <?php echo dsmart_is_white_theme_enabled() ? 'white-style' : 'dark-style'; ?>">
+<div class="tcg-container <?php echo dsmart_is_white_theme_enabled() ? 'white-style' : 'dark-style'; ?>" <?php echo $tcg_style; ?>>
 <?php if ($show_notify == "on" && $notify_text != "") : ?>
         <div class="hihi">
             <div class="shop-notify">
