@@ -625,11 +625,13 @@ html {
 .white-style .variable-product .inner{
     background-color: transparent !important;
     color: #222222 !important;
+    border: 1px solid #000 !important;
 }
 .white-style .variable-product .modal-box,
 .white-style .variable-product .content{
     background-color: transparent !important;
     color: #222222 !important;
+    border: 1px solid #000 !important;
 }
 
 /* Adjusted: keep overlay and button borders visible; only clear inner backgrounds */
