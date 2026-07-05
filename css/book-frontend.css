@@ -515,6 +515,12 @@ html {
     background-color: #000;
 }
 
+.white-style .menu-categories-wrapper{
+    background-color: #ffffff !important;
+    box-shadow: none !important;
+    color: #222222 !important;
+}
+
 .white-style .header{
     background-color: #ffffff;
     color: #222222;
@@ -574,7 +580,7 @@ html {
 .white-style .add-to-cart,
 .white-style .add-to-cart-copy{
     background-color: #ffffff !important;
-    color: inherit !important; /* inline styles set text color */
+    color: #222222 !important; /* force readable text in white theme */
     box-shadow: none !important;
 }
 
@@ -596,6 +602,21 @@ html {
 .white-style .variable-product .content{
     background-color: transparent !important;
     color: #222222 !important;
+}
+
+/* Remove visual borders for modal and buttons in white theme */
+.white-style .variable-product,
+.white-style .variable-product .inner,
+.white-style .variable-product .modal-box,
+.white-style .variable-product .content{
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.white-style .add-to-cart,
+.white-style .add-to-cart-copy{
+    border: none !important;
 }
 
 /* Ensure the mobile sidebar uses light background in white theme */
