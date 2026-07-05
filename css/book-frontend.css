@@ -602,6 +602,26 @@ html {
     border-radius: 8px !important;
     padding: 12px !important;
 }
+
+/* Ensure option-selection and copy buttons inherit configured button color and show border */
+.white-style .add-to-cart,
+.white-style .add-to-cart-copy,
+.white-style .add-to-cart-copy.option_selection_btn,
+.white-style .option_selection_btn{
+    color: var(--dsmart-button) !important;
+    border-color: var(--dsmart-button) !important;
+    background-color: transparent !important;
+}
+
+.white-style .add-to-cart span,
+.white-style .add-to-cart-copy span{
+    color: var(--dsmart-button) !important;
+}
+
+/* Use the button color for the variable overlay border so it matches dark mode emphasis */
+.white-style .variable-product{
+    border: 2px solid var(--dsmart-button) !important;
+}
 .white-style .variable-product .inner{
     background-color: transparent !important;
     color: #222222 !important;
