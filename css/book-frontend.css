@@ -570,6 +570,46 @@ html {
     color: #666666 !important;
 }
 
+/* White-theme specific overrides for interactive elements */
+.white-style .add-to-cart,
+.white-style .add-to-cart-copy{
+    background-color: #ffffff !important;
+    color: inherit !important; /* inline styles set text color */
+    box-shadow: none !important;
+}
+
+.white-style .add-to-cart:hover,
+.white-style .add-to-cart-copy:hover{
+    filter: brightness(0.98) !important;
+}
+
+/* Variable / modal dialog background and inner content in white theme */
+.white-style .variable-product{
+    background-color: rgba(255,255,255,0.98) !important;
+    color: #222222 !important;
+}
+.white-style .variable-product .inner{
+    background-color: transparent !important;
+    color: #222222 !important;
+}
+.white-style .variable-product .modal-box,
+.white-style .variable-product .content{
+    background-color: transparent !important;
+    color: #222222 !important;
+}
+
+/* Ensure the mobile sidebar uses light background in white theme */
+.white-style .mysidebar,
+.white-style .mySideBar{
+    background-color: #ffffff !important;
+    color: #222222 !important;
+}
+.white-style .mysidebar a,
+.white-style .mySideBar a{
+    color: #222222 !important;
+}
+
+
 .menu-categories-wrapper {
     display: none;
 }
