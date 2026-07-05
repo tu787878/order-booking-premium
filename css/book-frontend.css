@@ -572,6 +572,11 @@ html {
     color: #222222 !important;
 }
 
+body.white-style .list-product .item .title sup,
+body.white-style .list-product .item h3.title sup{
+    color: #000 !important;
+}
+
 .white-style .list-product .item .excerpt{
     color: #666666 !important;
 }
