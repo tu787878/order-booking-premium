@@ -678,6 +678,15 @@ body.white-style .tcg-container .add-to-cart-copy *{
     color: var(--dsmart-button) !important;
 }
 
+body.white-style .tcg-container .variable-product .add-to-cart,
+body.white-style .tcg-container .variable-product .add-to-cart-copy {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+}
+
 /* Ensure variable overlay shows an emphasized border */
 body.white-style .tcg-container .variable-product{
     border: 3px solid #000 !important;
@@ -689,6 +698,11 @@ body.white-style .variable-product{
     border-color: #000 !important;
 }
 
+body.white-style .variable-product .inner sup,
+body.white-style .variable-product .product-title sup,
+body.white-style .variable-product sup{
+    color: #000 !important;
+}
 
 .menu-categories-wrapper {
     display: none;
