@@ -632,19 +632,12 @@ html {
     color: #222222 !important;
 }
 
-/* Remove visual borders for modal and buttons in white theme */
-.white-style .variable-product,
+/* Adjusted: keep overlay and button borders visible; only clear inner backgrounds */
 .white-style .variable-product .inner,
 .white-style .variable-product .modal-box,
 .white-style .variable-product .content{
-    border: none !important;
     box-shadow: none !important;
     outline: none !important;
-}
-
-.white-style .add-to-cart,
-.white-style .add-to-cart-copy{
-    border: none !important;
 }
 
 /* Ensure the mobile sidebar uses light background in white theme */
@@ -656,6 +649,31 @@ html {
 .white-style .mysidebar a,
 .white-style .mySideBar a{
     color: #222222 !important;
+}
+
+/* High-specificity fallback to force visible button and overlay borders/text */
+body.white-style .tcg-container button.add-to-cart,
+body.white-style .tcg-container .add-to-cart,
+body.white-style .tcg-container .add-to-cart-copy,
+body.white-style .tcg-container .option_selection_btn,
+body.white-style .tcg-container .add-to-cart-copy.option_selection_btn,
+body.white-style .tcg-container .quantity-submit .add-to-cart{
+    color: var(--dsmart-button) !important;
+    -webkit-text-fill-color: var(--dsmart-button) !important;
+    background: transparent !important;
+    border: 3px solid var(--dsmart-button) !important;
+    box-shadow: none !important;
+}
+
+body.white-style .tcg-container .add-to-cart *,
+body.white-style .tcg-container .add-to-cart-copy *{
+    color: var(--dsmart-button) !important;
+}
+
+/* Ensure variable overlay shows an emphasized border */
+body.white-style .tcg-container .variable-product{
+    border: 3px solid var(--dsmart-button) !important;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.08) !important;
 }
 
 
