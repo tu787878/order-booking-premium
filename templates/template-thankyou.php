@@ -30,8 +30,13 @@ if (isset($_GET['success']) && $_GET['success'] == '1') {
         }
         
         /* Dark mode styles */
-        .order_page.ds-thankyou-page .ds-thankyou h2, .dark-style .order_page.ds-thankyou-page .ds-thankyou h6 {
+        .dark-style .order_page.ds-thankyou-page .ds-thankyou h6 {
             color: #fff !important;
+        }
+
+        /* Force thank-you header to black regardless of theme */
+        .order_page.ds-thankyou-page .ds-thankyou h2 {
+            color: #000 !important;
         }
         .order_page.ds-thankyou-page .ds-thankyou .dsmart-button {
             color: #fff !important;
