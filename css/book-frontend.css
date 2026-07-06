@@ -2934,3 +2934,35 @@ hr{
 .white-style .menu-category-list li a{
         color: #222222 !important;
 }
+
+/* Thank-you page: ensure visible in white (light) theme */
+.ds-thankyou-page .ds-thankyou{
+    text-align: center;
+    color: #fff; /* fallback for default/dark */
+}
+
+/* Light theme (white-style) overrides for thank-you areas */
+.white-style .ds-thankyou-page .ds-thankyou,
+.white-style .order_page .ds-thankyou{
+    color: #222222 !important;
+}
+.white-style .order_page .ds-thankyou .ds-thankyou-actions .ds-thankyou-back-btn{
+    color: #000 !important;
+}
+
+/* Improve `sup` appearance inside product items */
+.list-product .item sup,
+.list-product .item .title sup,
+.list-product .item h3.title sup{
+    font-size: 11px;
+    line-height: 1;
+    vertical-align: super;
+    margin-left: 4px;
+    color: inherit;
+}
+
+/* Force readable `sup` color in white theme */
+.white-style .list-product .item sup{
+    color: #000 !important;
+}
+
