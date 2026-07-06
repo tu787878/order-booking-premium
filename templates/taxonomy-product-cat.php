@@ -428,7 +428,7 @@ if (get_option('homepage_popup') === "2"){
                                                             <?php endif; ?>
                                                         </h3>
                                                         <?php if ($desc != '') : ?>
-                                                                <sup style="color: white !important;font-size:13px">(<?php echo $desc; ?>)</sup>
+                                                                <sup style="font-size:13px">(<?php echo $desc; ?>)</sup>
                                                             <?php endif; ?>
                                                         <div class="excerpt"><?php echo get_the_excerpt(); ?></div>
                                                     </div>
