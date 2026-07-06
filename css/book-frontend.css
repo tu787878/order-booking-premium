@@ -2954,15 +2954,18 @@ hr{
 .list-product .item sup,
 .list-product .item .title sup,
 .list-product .item h3.title sup{
-    font-size: 11px;
+    font-size: 13px !important;
     line-height: 1;
     vertical-align: super;
     margin-left: 4px;
     color: inherit;
 }
 
-/* Force readable `sup` color in white theme */
+/* Theme-specific `sup` colors (explicit to avoid contrast issues) */
+.dark-style .list-product .item sup{
+    color: #ffffff !important;
+}
 .white-style .list-product .item sup{
-    color: #000 !important;
+    color: #000000 !important;
 }
 
