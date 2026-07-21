@@ -3,7 +3,7 @@
 /**
  * Plugin Name: TCG Restaurant Shop Premium
  * Description: Restaurant Shop for delivery and take away
- * Version: 1.0.1.4
+ * Version: 1.0.1.5
  * License: GPLv2 or later
  */
 define('BOOKING_ORDER_PATH', plugin_dir_url(__FILE__));
@@ -2244,7 +2244,7 @@ function send_mail_after_order($order_id)
     $html_file .= '<h2 style="line-height: 1.3;margin: 0;text-align: center;">' . ucfirst($method_text) . '</h2>';
     $html_file .= '</div>';
     $order_placed_at = get_the_date('d.m.Y', $order_id) . ' ' . get_the_time('H:i:s', $order_id);
-    $html_file .= '<div style="margin-top: 10px;padding-top: 6px;border-top: 1px dashed #000;text-align: center;"><p style="font-size: 7px;line-height: 1.4;margin: 0;color: #555;">Bestellzeitpunkt: ' . $order_placed_at . '</p></div>';
+    $html_file .= '<h3 style="text-align: center;margin-top: 0;margin-bottom: 10px;">Bestellzeitpunkt: ' . $order_placed_at . '</h3>';
     $html_file .= '</body> </html>';
     $random_val = "order" . $order_id;
     //create example
@@ -2465,7 +2465,7 @@ $html_file = '<!DOCTYPE html> <html style="margin: 0;padding: 0;"> <head> <meta 
     $html_file .= '</div>';
     $html_file .= $data_pool;
     if ($order_placed_at !== '') {
-        $html_file .= '<div style="margin-top: 10px;padding-top: 6px;border-top: 1px dashed #000;text-align: center;"><p style="font-size: 7px;line-height: 1.4;margin: 0;color: #555;">Bestellzeitpunkt: ' . $order_placed_at . '</p></div>';
+        $html_file .= '<h3 style="text-align: center;margin-top: 0;margin-bottom: 10px;">Bestellzeitpunkt: ' . $order_placed_at . '</h3>';
     }
     $html_file .= '</body> </html>';
 
