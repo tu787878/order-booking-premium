@@ -3,7 +3,7 @@
 /**
  * Plugin Name: TCG Restaurant Shop Premium
  * Description: Restaurant Shop for delivery and take away
- * Version: 1.0.1.5
+ * Version: 1.0.1.6
  * License: GPLv2 or later
  */
 define('BOOKING_ORDER_PATH', plugin_dir_url(__FILE__));
@@ -2243,8 +2243,11 @@ function send_mail_after_order($order_id)
     $html_file .= '</b></p>';
     $html_file .= '<h2 style="line-height: 1.3;margin: 0;text-align: center;">' . ucfirst($method_text) . '</h2>';
     $html_file .= '</div>';
-    $order_placed_at = get_the_date('d.m.Y', $order_id) . ' ' . get_the_time('H:i:s', $order_id);
-    $html_file .= '<h3 style="text-align: center;margin-top: 0;margin-bottom: 10px;">Bestellzeitpunkt: ' . $order_placed_at . '</h3>';
+    $show_order_placed_at = get_option('show_order_placed_at', '1');
+    $order_placed_at = ($show_order_placed_at === '1') ? get_the_date('d.m.Y', $order_id) . ' ' . get_the_time('H:i:s', $order_id) : '';
+    if ($order_placed_at !== '') {
+        $html_file .= '<h3 style="text-align: center;margin-top: 0;margin-bottom: 10px;">Bestellzeitpunkt: ' . $order_placed_at . '</h3>';
+    }
     $html_file .= '</body> </html>';
     $random_val = "order" . $order_id;
     //create example
@@ -2405,7 +2408,7 @@ function send_mail_after_order($order_id)
                     $data_pool .= '</div>';
                 }
             }
-            $order_placed_at_pool = get_the_date('d.m.Y', $order_id) . ' ' . get_the_time('H:i:s', $order_id);
+            $order_placed_at_pool = ($show_order_placed_at === '1') ? get_the_date('d.m.Y', $order_id) . ' ' . get_the_time('H:i:s', $order_id) : '';
             $attachments[] = create_pool($pool, $random_val, $i++, $total_pool, $show_second_number, $second_order_number, $customer_name1, $customer_name2, $data_pool, $order_time_info2, $order_placed_at_pool);
         }
     }

@@ -65,6 +65,9 @@ function general_booking_setting()
 
 			$show_second_number = $_POST['show_second_number'];
 			update_option('show_second_number', $show_second_number, 'yes');
+
+			$show_order_placed_at = isset($_POST['show_order_placed_at']) ? $_POST['show_order_placed_at'] : '1';
+			update_option('show_order_placed_at', $show_order_placed_at, 'yes');
 			
 			/*$tax_shipping = $_POST['tax_shipping'];
 			update_option('tax_shipping',$tax_shipping,'yes');*/
@@ -1023,6 +1026,7 @@ function general_booking_setting()
 	$show_profile = get_option('show_profile');
 	//second order
 	$show_second_number = get_option('show_second_number');
+	$show_order_placed_at = get_option('show_order_placed_at', '1');
 	$enable_pool = get_option('enable_pool');
 	$enable_display_conflicts = get_option('enable_display_conflicts');
 	$homepage_popup = get_option('homepage_popup');
@@ -1178,6 +1182,11 @@ function general_booking_setting()
 					<div class="form-group">
 						<p>Derzeitige Angezeigte-Nummer: <?php echo $total_order_in_date; ?></p>
 						<button class="button reset-order" type="button">Zurücksetzen</button>
+					</div>
+					<h2><?php _e("Bestellzeitpunkt anzeigen?"); ?></h2>
+					<div class="radio-wrap">
+						<label><input type="radio" name="show_order_placed_at" value="0" <?php if ($show_order_placed_at != "1") echo 'checked'; ?>>Aus</label>
+						<label><input type="radio" name="show_order_placed_at" value="1" <?php if ($show_order_placed_at == "1") echo 'checked'; ?>>An</label>
 					</div>
 					<!-- <h2><?php _e("Mwst für Lieferung"); ?></h2>
 					<div class="form-group">
