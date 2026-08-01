@@ -2741,7 +2741,7 @@ html, body {
 }
 
 .tcg-container{
-    overflow: visible !important;
+    overflow: hidden !important;
 }
 
 .main-container {
