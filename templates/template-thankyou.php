@@ -34,6 +34,11 @@ if (isset($_GET['success']) && $_GET['success'] == '1') {
             color: #fff !important;
         }
 
+        /* Dark mode styles */
+        html body.dark-style .order_page.ds-thankyou-page .ds-thankyou h2, html body.dark-style .order_page.ds-thankyou-page .ds-thankyou h6 {
+            color: #fff !important;
+        }
+
         /* Force thank-you header to black regardless of theme */
         .order_page.ds-thankyou-page .ds-thankyou h2 {
             color: #000 !important;
