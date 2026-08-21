@@ -41,7 +41,7 @@ if (isset($_GET['success']) && $_GET['success'] == '1') {
 
         /* Force thank-you header to black regardless of theme */
         .order_page.ds-thankyou-page .ds-thankyou h2 {
-            color: #000 !important;
+            color: #000;
         }
         .order_page.ds-thankyou-page .ds-thankyou .dsmart-button {
             color: #fff !important;
