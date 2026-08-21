@@ -14,41 +14,56 @@ if (isset($_GET['success']) && $_GET['success'] == '1') {
     get_header();
     ?>
     <style>
-        /* Light mode styles */
-        .order_page.ds-thankyou-page { 
-            text-align: center; 
+        /* Container and spacing */
+        .order_page.ds-thankyou-page {
+            text-align: center;
         }
-        .order_page.ds-thankyou-page .ds-thankyou { 
-            max-width: 600px; 
-            margin: 0 auto; 
+        .order_page.ds-thankyou-page .ds-thankyou,
+        .order_page.ds-thankyou-page .ds-thankyou-new {
+            max-width: 600px;
+            margin: 0 auto;
         }
-        .order_page.ds-thankyou-page .ds-thankyou h2, .order_page.ds-thankyou-page .ds-thankyou h6 { 
+        .order_page.ds-thankyou-page .ds-thankyou h2,
+        .order_page.ds-thankyou-page .ds-thankyou h6,
+        .order_page.ds-thankyou-page .ds-thankyou-new h2,
+        .order_page.ds-thankyou-page .ds-thankyou-new h6 {
             margin: 0.5em 0;
         }
-        .order_page.ds-thankyou-page .ds-thankyou-actions { 
-            margin-top: 1.5em; 
-        }
-        
-        /* Dark mode styles */
-        .dark-style .order_page.ds-thankyou-page .ds-thankyou h6 {
-            color: #fff !important;
+        .order_page.ds-thankyou-page .ds-thankyou-actions {
+            margin-top: 1.5em;
         }
 
-        /* Dark mode styles */
-        html body.dark-style .order_page.ds-thankyou-page .ds-thankyou h2, html body.dark-style .order_page.ds-thankyou-page .ds-thankyou h6 {
-            color: #fff !important;
-        }
-
-        /* Force thank-you header to black regardless of theme */
-        .order_page.ds-thankyou-page .ds-thankyou h2 {
+        /* Default (light) theme: use dark text */
+        .order_page.ds-thankyou-page .ds-thankyou-new h2,
+        .order_page.ds-thankyou-page .ds-thankyou-new h6 {
             color: #000;
         }
+
+        /* Dark theme: force white text for thank-you headings */
+        .order_page.ds-thankyou-page.dark-style .ds-thankyou-new h2,
+        .order_page.ds-thankyou-page.dark-style .ds-thankyou-new h6,
+        html body.dark-style .order_page.ds-thankyou-page .ds-thankyou-new h2,
+        html body.dark-style .order_page.ds-thankyou-page .ds-thankyou-new h6 {
+            color: #fff !important;
+        }
+
+        /* White style: ensure headings are dark */
+        .order_page.ds-thankyou-page.white-style .ds-thankyou-new h2,
+        .order_page.ds-thankyou-page.white-style .ds-thankyou-new h6,
+        html body.white-style .order_page.ds-thankyou-page .ds-thankyou-new h2,
+        html body.white-style .order_page.ds-thankyou-page .ds-thankyou-new h6 {
+            color: #000 !important;
+        }
+
+        /* Button text color
+           keep button text readable regardless of theme */
+        .order_page.ds-thankyou-page .ds-thankyou-new .dsmart-button,
         .order_page.ds-thankyou-page .ds-thankyou .dsmart-button {
             color: #fff !important;
         }
     </style>
     <div class="order_page ds-thankyou-page <?php echo dsmart_is_white_theme_enabled() ? 'white-style' : 'dark-style'; ?>">
-        <div class="ds-thankyou">
+        <div class="ds-thankyou-new">
             <h2><?php _e('Vielen Dank', 'dsmart'); ?></h2>
             <h6><?php _e('Ihre Bestellung war erfolgreich!', 'dsmart'); ?></h6>
             <p class="ds-thankyou-actions">
