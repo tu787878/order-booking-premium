@@ -365,6 +365,7 @@ require plugin_dir_path(__FILE__) . '/inc/term_metabox.php';
 require plugin_dir_path(__FILE__) . '/inc/shortcode.php';
 require plugin_dir_path(__FILE__) . '/templates/add-to-cart.php';
 require plugin_dir_path(__FILE__) . '/inc/admin-menu.php';
+require_once plugin_dir_path(__FILE__) . '/inc/shop-analytics.php';
 require plugin_dir_path(__FILE__) . '/inc/create-table.php';
 require plugin_dir_path(__FILE__) . '/inc/ajax-functions.php';
 require plugin_dir_path(__FILE__) . '/inc/coupon-functions.php';
