@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1.13
+- Enabled announcement bar animation on desktop and mobile.
+- Kept shop headers visible while scrolling on desktop and mobile.
+- Added a mobile scroll-to-top button positioned above floating cart controls.
+
 ## 1.0.1.12
 - Fixed duplicate worksheet-scoped filter definitions that could cause Excel to reject or repair multi-sheet exports.
 
