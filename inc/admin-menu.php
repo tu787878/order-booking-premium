@@ -30,6 +30,8 @@ function general_booking_setting()
 				$dsmart_horizontal_menu = '';
 			}
 			update_option('dsmart_horizontal_menu', $dsmart_horizontal_menu, 'yes');
+			$show_category_descriptions = isset($_POST['dsmart_show_category_descriptions']) && $_POST['dsmart_show_category_descriptions'] === '1' ? '1' : '0';
+			update_option('dsmart_show_category_descriptions', $show_category_descriptions, 'yes');
 
 			if (isset($_POST['dsmart_buynow'])) {
 				$dsmart_buynow = $_POST['dsmart_buynow'];
@@ -765,6 +767,7 @@ function general_booking_setting()
 	$dsmart_taxonomy_text = get_option('dsmart_taxonomy_text');
 	$dsmart_thumbnail = get_option('dsmart_thumbnail');
 	$dsmart_horizontal_menu = get_option('dsmart_horizontal_menu');
+	$dsmart_show_category_descriptions = get_option('dsmart_show_category_descriptions', '0');
 	$dsmart_buynow = get_option('dsmart_buynow');
 	$dsmart_stock = get_option('dsmart_stock');
 
@@ -1080,6 +1083,11 @@ function general_booking_setting()
 																							echo 'checked';
 																						} ?>><?php _e('Horizontal-Menu') ?></label>
 					</div>
+					<fieldset class="form-group">
+                        <legend><?php _e('Kategoriebeschreibungen anzeigen', 'dsmart'); ?></legend>
+                        <label><input type="radio" name="dsmart_show_category_descriptions" value="0" <?php checked($dsmart_show_category_descriptions, '0'); ?>><?php _e('Aus', 'dsmart'); ?></label>
+                        <label><input type="radio" name="dsmart_show_category_descriptions" value="1" <?php checked($dsmart_show_category_descriptions, '1'); ?>><?php _e('An', 'dsmart'); ?></label>
+                    </fieldset>
 					<h2><?php _e("Logo"); ?></h2>
 					<div class="form-group">
 						<div class="ds-logo-img">

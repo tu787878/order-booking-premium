@@ -3000,3 +3000,13 @@ body.dsmart-shop-navigation #goto-top { display: none !important; }
 }
 #dsmart-scroll-top[hidden] { display: none !important; }
 #dsmart-scroll-top:focus-visible { outline: 3px solid #ff8000; outline-offset: 3px; }
+
+.dsmart-category-description {
+    margin: 0 auto 20px;
+    max-width: 800px;
+    padding: 0 15px;
+    overflow-wrap: anywhere;
+}
+.tcg-container.dark-style .dsmart-category-description { color: #fff; }
+.tcg-container.white-style .dsmart-category-description { color: #222; }
+.dsmart-category-description p { color: inherit; }

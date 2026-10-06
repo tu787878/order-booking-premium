@@ -1,6 +1,7 @@
 <?php global $wp_query;
 $dsmart_thumbnail = get_option('dsmart_thumbnail');
 $dsmart_horizontal_menu = get_option('dsmart_horizontal_menu');
+$show_category_descriptions = get_option('dsmart_show_category_descriptions', '0') === '1';
 $dsmart_stock = get_option('dsmart_stock');
 $current_term = get_queried_object();
 
@@ -356,6 +357,12 @@ if (get_option('homepage_popup') === "2"){
                                     <input type="hidden" name="id" value="<?php echo $term->term_id ?>">
                                     <div>
                                         <h2 class="change_when_scroll"><?php echo $term->name ?></h2>
+                                        <?php if ($show_category_descriptions) :
+                                            $category_description = term_description($term->term_id, 'product-cat');
+                                            if (trim($category_description) !== '') : ?>
+                                                <div class="dsmart-category-description"><?php echo wp_kses_post($category_description); ?></div>
+                                            <?php endif;
+                                        endif; ?>
                                     </div>
                                 </div>
                                 <!-- ?ao_noptirocket=1 -->

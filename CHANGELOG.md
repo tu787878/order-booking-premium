@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1.14
+- Added an An/Aus radio setting to display category descriptions beneath category headings; disabled by default.
+
 ## 1.0.1.13
 - Enabled announcement bar animation on desktop and mobile.
 - Kept shop headers visible while scrolling on desktop and mobile.
