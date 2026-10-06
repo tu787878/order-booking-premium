@@ -521,7 +521,12 @@ html {
     color: #222222 !important;
 }
 
-.white-style .header{
+.tcg-container.dark-style .header {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.tcg-container.white-style .header{
     background-color: #ffffff;
     color: #222222;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);

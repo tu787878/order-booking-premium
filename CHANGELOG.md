@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1.15
+- Made the shop header background follow the dark or white theme instead of the saved custom header color, including while sticky.
+
 ## 1.0.1.14
 - Added an An/Aus radio setting to display category descriptions beneath category headings; disabled by default.
 

@@ -273,19 +273,13 @@ if (get_option('homepage_popup') === "2"){
                         $header_image_url = $url[0];
                     } 
 
-                    $header_color = get_option('header_color', "");
-
                     $style = "";
                     if($header_image_url != "")
                     {
                         $style = "background-image: url('".$header_image_url."') !important;";
                     }
-                    else if($header_color != "")
-                    {
-                        $style = "background-color: " . $header_color ." !important";
-                    }
                 ?>
-                <div class="header" style="<?php echo $style;?>">
+                <div class="header" style="<?php echo esc_attr($style); ?>">
                     <div class="row">
                         <span id="openNavBtn" style="font-size:30px;cursor:pointer;margin-left: 7%;color: <?php echo $sidebar_color?> !important;" onclick="openNav()">&#9776;</span>
                         <?php $image_id = get_option('ds_logo');
