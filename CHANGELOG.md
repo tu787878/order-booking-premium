@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1.16
+- Show the German minimum-order requirement when a coupon is applied below its configured order minimum.
+
 ## 1.0.1.15
 - Made the shop header background follow the dark or white theme instead of the saved custom header color, including while sticky.
 
