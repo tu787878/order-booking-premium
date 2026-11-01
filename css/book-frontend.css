@@ -3015,3 +3015,8 @@ body.dsmart-shop-navigation #goto-top { display: none !important; }
 .tcg-container.dark-style .dsmart-category-description { color: #fff; }
 .tcg-container.white-style .dsmart-category-description { color: #222; }
 .dsmart-category-description p { color: inherit; }
+
+/* Keep checkout field labels readable in the white theme. */
+body .checkout-page.white-style .dsmart-section label {
+    color: #111111 !important;
+}

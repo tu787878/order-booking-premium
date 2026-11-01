@@ -3,12 +3,14 @@
 /**
  * Plugin Name: TCG Restaurant Shop Premium
  * Description: Restaurant Shop for delivery and take away
- * Version: 1.0.1.16
+ * Version: 1.0.1.19
  * License: GPLv2 or later
  */
 define('BOOKING_ORDER_PATH', plugin_dir_url(__FILE__));
 define('BOOKING_ORDER_PATH2', plugin_dir_path(__FILE__));
 date_default_timezone_set('Europe/Berlin');
+
+require_once BOOKING_ORDER_PATH2 . 'inc/preparation-time.php';
 
 // Restrict search to admins only
 add_action('template_redirect', function() {
@@ -2837,7 +2839,7 @@ function custom_date($date = null)
 function get_current_time()
 {
     date_default_timezone_set('Europe/Berlin');
-    $delay_time = get_option('delay_time');
+    $delay_time = ds_get_preparation_time('delay_time');
     /*if($delay_time != "" && $delay_time != 0){
         $current_time = date('H:i',strtotime("+".$delay_time." minutes"));
     }else{*/
@@ -2848,7 +2850,7 @@ function get_current_time()
 function get_current_time2()
 {
     date_default_timezone_set('Europe/Berlin');
-    $delay_time = get_option('delay_delivery');
+    $delay_time = ds_get_preparation_time('delay_delivery');
     $current_time = date('H:i');
     return $current_time;
 }
@@ -2856,7 +2858,7 @@ function get_current_time2()
 function get_close_time_shop_nodelay()
 {
     date_default_timezone_set('Europe/Berlin');
-    $delay_time = get_option('delay_time');
+    $delay_time = ds_get_preparation_time('delay_time');
     $current_time = date('H:i');
     $time_data = date('H:i', strtotime($current_time));
     $time = new DateTime($current_time);
@@ -2928,7 +2930,7 @@ function get_close_time_shop_nodelay()
 function get_close_time_shop2_nodelay()
 {
     date_default_timezone_set('Europe/Berlin');
-    $delay_time = get_option('delay_delivery');
+    $delay_time = ds_get_preparation_time('delay_delivery');
     $current_time = date('H:i');
     $time_data = date('H:i', strtotime($current_time));
     $time = new DateTime($current_time);
@@ -3244,7 +3246,7 @@ function get_close_time_category($t_id, $specific_date = null)
 function get_close_time_shop()
 {
     date_default_timezone_set('Europe/Berlin');
-    $delay_time = get_option('delay_time');
+    $delay_time = ds_get_preparation_time('delay_time');
     if ($delay_time != "" && $delay_time != 0) {
         $current_time = date('H:i', strtotime("+" . $delay_time . " minutes"));
     } else {
@@ -3324,7 +3326,7 @@ function get_close_time_shop()
 function get_close_time_shop2()
 {
     date_default_timezone_set('Europe/Berlin');
-    $delay_time = get_option('delay_delivery');
+    $delay_time = ds_get_preparation_time('delay_delivery');
     if ($delay_time != "" && $delay_time != 0) {
         $current_time = date('H:i', strtotime("+" . $delay_time . " minutes"));
     } else {
@@ -3433,7 +3435,7 @@ function get_close_time_shop_all_week()
     $dsmart_custom_date = get_option('dsmart_custom_date');
     // $closed_time = get_option('closed_time');
     $closed_time = get_option('closed_time_2');
-    $delay_time = get_option('delay_delivery');
+    $delay_time = ds_get_preparation_time('delay_delivery');
     $date_from = Date('d-m-Y', strtotime(date('Y-m-d')));
     $date_to = Date('d-m-Y', strtotime("+7 day", strtotime(date('Y-m-d'))));
     $period = new DatePeriod(

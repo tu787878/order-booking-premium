@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.1.19
+- Fixed invisible checkout field labels in the white theme while preserving dark-theme label colors.
+
+## 1.0.1.18
+- Added multiple daily preparation-time windows for delivery and pickup in both settings screens, overriding the fixed time during matching windows, including overnight periods.
+
+## 1.0.1.17
+- Keep coupon error notifications visible for at least eight seconds and prevent older popup timers from hiding newer notifications.
+
 ## 1.0.1.16
 - Show the German minimum-order requirement when a coupon is applied below its configured order minimum.
 
