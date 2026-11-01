@@ -3,7 +3,7 @@
 /**
  * Plugin Name: TCG Restaurant Shop Premium
  * Description: Restaurant Shop for delivery and take away
- * Version: 1.0.1.19
+ * Version: 1.0.1.20
  * License: GPLv2 or later
  */
 define('BOOKING_ORDER_PATH', plugin_dir_url(__FILE__));
@@ -1558,8 +1558,8 @@ function check_time_with_time_shop($time, $current_time = null, $current_date = 
         $time_data = date('H:i', strtotime($time));
         $time = new DateTime($time);
     } else {
-        $zxc_time   = date('H:i');
-        $time = new DateTime($zxc_time);
+        $time_data = date('H:i');
+        $time = new DateTime($time_data);
     }
     $close_shop = get_option('dsmart_close_shop');
     $current_date_text = custom_date();
@@ -1606,6 +1606,14 @@ function check_time_with_time_shop($time, $current_time = null, $current_date = 
     } elseif ($current_time != null && date('H:i', strtotime($current_time)) > $time_data) {
         return false;
     } else {
+        // Weekly breaks also apply within date-specific opening hours.
+        foreach ($closed_time_array as $item_data) {
+            $closed_from = date('H:i', strtotime($item_data['from']));
+            $closed_to = date('H:i', strtotime($item_data['to']));
+            if ($time_data >= $closed_from && $time_data <= $closed_to) {
+                return false;
+            }
+        }
         if (count($time_shop_array) > 0) {
             $check_data = true;
             foreach ($time_shop_array as $item_data) {
@@ -2762,29 +2770,12 @@ function dsmart_float_cart()
     $dsmart_method_ship = get_option('dsmart_method_ship');
     $dsmart_method_direct = get_option('dsmart_method_direct');
     if ($close_shop_text != "") {
-        $check_time_open = true;
-        $time1 = get_close_time_shop_nodelay();
-        $time2 = get_close_time_shop2_nodelay();
-        $now1 = new DateTime(get_current_time());
-        $now2 = new DateTime(get_current_time2());
-        if (count($time1) > 0) {
-            /*foreach ($time1 as $value) {
-	    		$begin = new DateTime($value[0]);
-				$end = new DateTime($value[1]);
-				if($now1 > $begin && $now1 < $end){
-					$check_time_open = false;
-				}
-	    	}*/
-            foreach ($time2 as $value) {
-                $begin = new DateTime($value[0]);
-                $end = new DateTime($value[1]);
-                if ($now2 > $begin && $now2 < $end) {
-                    $check_time_open = false;
-                }
-            }
-        }
-
-        $closing = !(($check1 && $dsmart_method_ship) || ($check2 && $dsmart_method_direct));
+        // A break in either enabled service must remain visible to customers.
+        $shipping_enabled = $dsmart_method_ship === 'on';
+        $pickup_enabled = $dsmart_method_direct === 'on';
+        $closing = ($shipping_enabled && !$check1)
+            || ($pickup_enabled && !$check2)
+            || (!$shipping_enabled && !$pickup_enabled);
 
         if ($closing && is_page_template('templates/taxonomy-product-cat.php')) { ?>
             <div class="dsmart-show-notify">

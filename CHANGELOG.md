@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1.20
+- Show the closing bar whenever an enabled pickup or delivery service is closed, including lunch breaks while the other service remains open.
+- Apply weekly breaks within date-specific opening hours in Premium as well.
+
 ## 1.0.1.19
 - Fixed invisible checkout field labels in the white theme while preserving dark-theme label colors.
 
