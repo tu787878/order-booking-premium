@@ -3,7 +3,7 @@
 /**
  * Plugin Name: TCG Restaurant Shop Premium
  * Description: Restaurant Shop for delivery and take away
- * Version: 1.0.1.20
+ * Version: 1.0.1.21
  * License: GPLv2 or later
  */
 define('BOOKING_ORDER_PATH', plugin_dir_url(__FILE__));
@@ -348,6 +348,10 @@ function book_frontend_scripts()
                 'close_time' => get_close_time_shop2(),
                 'close_all' => get_close_time_shop_all_week(),
                 'currency' => ds_price_symbol(),
+                'preparation' => array(
+                    'delivery' => array('default' => (int) get_option('delay_time'), 'windows' => ds_sanitize_preparation_windows(get_option('delay_time_windows'))),
+                    'pickup' => array('default' => (int) get_option('delay_delivery'), 'windows' => ds_sanitize_preparation_windows(get_option('delay_delivery_windows'))),
+                ),
                 'delivery_step' => get_option('dsmart_delivery_time_step', 15),
                 'takeaway_step' => get_option('dsmart_takeaway_time_step', 15),
                 'currency_rate' => get_option('dsmart_currency_rate'),
@@ -2828,7 +2832,7 @@ function custom_date($date = null)
 function get_current_time()
 {
     date_default_timezone_set('Europe/Berlin');
-    $delay_time = ds_get_preparation_time('delay_time');
+    $delay_time = 0; // Preparation is added to the selected time, not to the current clock.
     /*if($delay_time != "" && $delay_time != 0){
         $current_time = date('H:i',strtotime("+".$delay_time." minutes"));
     }else{*/
@@ -2839,7 +2843,7 @@ function get_current_time()
 function get_current_time2()
 {
     date_default_timezone_set('Europe/Berlin');
-    $delay_time = ds_get_preparation_time('delay_delivery');
+    $delay_time = 0; // Preparation is added to the selected time, not to the current clock.
     $current_time = date('H:i');
     return $current_time;
 }
@@ -2847,7 +2851,7 @@ function get_current_time2()
 function get_close_time_shop_nodelay()
 {
     date_default_timezone_set('Europe/Berlin');
-    $delay_time = ds_get_preparation_time('delay_time');
+    $delay_time = 0; // Preparation is added to the selected time, not to the current clock.
     $current_time = date('H:i');
     $time_data = date('H:i', strtotime($current_time));
     $time = new DateTime($current_time);
@@ -2919,7 +2923,7 @@ function get_close_time_shop_nodelay()
 function get_close_time_shop2_nodelay()
 {
     date_default_timezone_set('Europe/Berlin');
-    $delay_time = ds_get_preparation_time('delay_delivery');
+    $delay_time = 0; // Preparation is added to the selected time, not to the current clock.
     $current_time = date('H:i');
     $time_data = date('H:i', strtotime($current_time));
     $time = new DateTime($current_time);
@@ -3235,7 +3239,7 @@ function get_close_time_category($t_id, $specific_date = null)
 function get_close_time_shop()
 {
     date_default_timezone_set('Europe/Berlin');
-    $delay_time = ds_get_preparation_time('delay_time');
+    $delay_time = 0; // Preparation is added to the selected time, not to the current clock.
     if ($delay_time != "" && $delay_time != 0) {
         $current_time = date('H:i', strtotime("+" . $delay_time . " minutes"));
     } else {
@@ -3315,7 +3319,7 @@ function get_close_time_shop()
 function get_close_time_shop2()
 {
     date_default_timezone_set('Europe/Berlin');
-    $delay_time = ds_get_preparation_time('delay_delivery');
+    $delay_time = 0; // Preparation is added to the selected time, not to the current clock.
     if ($delay_time != "" && $delay_time != 0) {
         $current_time = date('H:i', strtotime("+" . $delay_time . " minutes"));
     } else {
@@ -3424,7 +3428,7 @@ function get_close_time_shop_all_week()
     $dsmart_custom_date = get_option('dsmart_custom_date');
     // $closed_time = get_option('closed_time');
     $closed_time = get_option('closed_time_2');
-    $delay_time = ds_get_preparation_time('delay_delivery');
+    $delay_time = 0; // Preparation is added to the selected time, not to the current clock.
     $date_from = Date('d-m-Y', strtotime(date('Y-m-d')));
     $date_to = Date('d-m-Y', strtotime("+7 day", strtotime(date('Y-m-d'))));
     $period = new DatePeriod(
