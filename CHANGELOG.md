@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1.23
+- Simplified the delivery and pickup settings tab with grouped, collapsible sections, separate service cards, compact time-window editors, and optional help text.
+
+## 1.0.1.22
+- Added multiple daily custom time-interval windows for delivery and pickup, with fixed intervals used outside the windows and preparation boundaries preserved in frontend selections.
+
 ## 1.0.1.21
 - Apply preparation times to available frontend time selections for delivery and pickup, using custom time windows and the fixed default elsewhere. Keep the selected order time unchanged and validate availability before checkout.
 

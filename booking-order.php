@@ -3,7 +3,7 @@
 /**
  * Plugin Name: TCG Restaurant Shop Premium
  * Description: Restaurant Shop for delivery and take away
- * Version: 1.0.1.21
+ * Version: 1.0.1.23
  * License: GPLv2 or later
  */
 define('BOOKING_ORDER_PATH', plugin_dir_url(__FILE__));
@@ -348,6 +348,8 @@ function book_frontend_scripts()
                 'close_time' => get_close_time_shop2(),
                 'close_all' => get_close_time_shop_all_week(),
                 'currency' => ds_price_symbol(),
+                'delivery_step_windows' => ds_sanitize_interval_windows(get_option('dsmart_delivery_time_step_windows')),
+                'takeaway_step_windows' => ds_sanitize_interval_windows(get_option('dsmart_takeaway_time_step_windows')),
                 'delivery_step' => get_option('dsmart_delivery_time_step', 15),
                 'takeaway_step' => get_option('dsmart_takeaway_time_step', 15),
                 'currency_rate' => get_option('dsmart_currency_rate'),
