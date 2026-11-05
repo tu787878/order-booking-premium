@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1.24
+- Moved popup settings into Bestellannahme; grouped standard values and weekday-specific time windows; disabled delivery and pickup settings when the service is off; arranged time settings and closing times side by side with compact tables and German “bis” labels.
+
 ## 1.0.1.23
 - Simplified the delivery and pickup settings tab with grouped, collapsible sections, separate service cards, compact time-window editors, and optional help text.
 
