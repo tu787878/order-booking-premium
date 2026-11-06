@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1.26
+- Visually disable the full delivery or pickup settings card when its service is turned off.
+
 ## 1.0.1.25
 - Merged preparation-time and time-interval overrides into one table per service; blank value cells leave that setting at its standard value.
 
