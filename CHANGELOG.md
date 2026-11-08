@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1.30
+- Added an active checkbox to each special time-window row so rules can be disabled without deleting them.
+
 ## 1.0.1.29
 - Use a 24-hour time picker for special delivery and pickup time windows.
 
