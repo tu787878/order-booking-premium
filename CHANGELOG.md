@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1.33
+- Fixed the active time-window checkbox appearance.
+
 ## 1.0.1.32
 - Stack delivery and pickup time-window settings vertically while restoring the table layout for each service.
 
