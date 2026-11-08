@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1.31
+- Display special time-window rows as vertical setting cards to keep all controls visible.
+
 ## 1.0.1.30
 - Added an active checkbox to each special time-window row so rules can be disabled without deleting them.
 
