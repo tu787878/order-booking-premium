@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1.32
+- Stack delivery and pickup time-window settings vertically while restoring the table layout for each service.
+
 ## 1.0.1.31
 - Display special time-window rows as vertical setting cards to keep all controls visible.
 
