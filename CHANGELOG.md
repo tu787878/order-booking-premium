@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1.36
+- Match custom discount settings to the default layout, with radio choices, weekday time buttons and special-date rows; remove explanatory text.
+- Lock default controls whenever a custom configuration exists, preserving saved default values and restoring editing after the last custom configuration is deleted.
+
 ## 1.0.1.35
 - Added multiple dated direct-discount configurations to both settings screens and all pricing paths, preserving the permanent default only when no custom configurations exist.
 - Match standard-plugin behavior for inclusive Berlin-date ranges, overlap priority, overnight hours, special-date overrides, and minimum order values.
