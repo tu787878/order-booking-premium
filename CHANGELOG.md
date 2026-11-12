@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1.35
+- Added multiple dated direct-discount configurations to both settings screens and all pricing paths, preserving the permanent default only when no custom configurations exist.
+- Match standard-plugin behavior for inclusive Berlin-date ranges, overlap priority, overnight hours, special-date overrides, and minimum order values.
+
 ## 1.0.1.33
 - Fixed the active time-window checkbox appearance.
 

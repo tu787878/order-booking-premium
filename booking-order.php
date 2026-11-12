@@ -3,7 +3,7 @@
 /**
  * Plugin Name: TCG Restaurant Shop Premium
  * Description: Restaurant Shop for delivery and take away
- * Version: 1.0.1.33
+ * Version: 1.0.1.35
  * License: GPLv2 or later
  */
 define('BOOKING_ORDER_PATH', plugin_dir_url(__FILE__));
@@ -11,6 +11,7 @@ define('BOOKING_ORDER_PATH2', plugin_dir_path(__FILE__));
 date_default_timezone_set('Europe/Berlin');
 
 require_once BOOKING_ORDER_PATH2 . 'inc/preparation-time.php';
+require_once BOOKING_ORDER_PATH2 . 'inc/discount-profiles.php';
 
 // Restrict search to admins only
 add_action('template_redirect', function() {
@@ -3715,15 +3716,15 @@ function create_new_order($data, $status = 'processing', $transaction_id = null)
     $total_all_use_coupon = $total_all_use_coupon;
     add_post_meta($order_id, 'subtotal', $total_all);
     if ($shipping_method == "shipping") {
-        $type_promotion = get_option('type_promotion');
-        $promotion      = get_option('promotion');
+        $type_promotion = ds_discount_option('type_promotion');
+        $promotion      = ds_discount_option('promotion');
     } else {
-        $type_promotion = get_option('type_promotion_2');
-        $promotion      = get_option('promotion_2');
+        $type_promotion = ds_discount_option('type_promotion_2');
+        $promotion      = ds_discount_option('promotion_2');
     }
     $reduce = '';
     $reduce_percent = '';
-    $discount_min = get_option('discount_min');
+    $discount_min = ds_discount_option('discount_min');
     if ($discount_min != '' && $discount_min != 0 && $discount_min != '0' && floatval($discount_min) > $total_all) {
     }else{
         if ($promotion != null && $has_discount) :
@@ -3806,14 +3807,47 @@ function is_discount_time($shoptime = null, $date = null, $method = "shipping")
     date_default_timezone_set('Europe/Berlin');
     $has_discount = false;
     $current_time   = date('H:i');
-    $discount_cod   = get_option('discount_cod');
-    $discount_shop  = get_option('discount_shop');
+    $discount_cod   = ds_discount_option('discount_cod');
+    $discount_shop  = ds_discount_option('discount_shop');
     // $time = strtotime($time);
     if ($shoptime != null && $shoptime !== "So schnell wie möglich") :
         $time_data  = strtotime($shoptime);
     else :
         $time_data  = strtotime($current_time);
     endif;
+
+    $time_to_minutes = function ($time_string) {
+        $time_string = trim((string) $time_string);
+        if ($time_string === '') {
+            return null;
+        }
+        $parts = explode(':', $time_string);
+        if (count($parts) < 2) {
+            return null;
+        }
+        $h = intval($parts[0]);
+        $m = intval($parts[1]);
+        if ($h < 0 || $h > 23 || $m < 0 || $m > 59) {
+            return null;
+        }
+        return $h * 60 + $m;
+    };
+
+    $time_in_range = function ($time_minutes, $start_string, $end_string) use ($time_to_minutes) {
+        $start_minutes = $time_to_minutes($start_string);
+        $end_minutes = $time_to_minutes($end_string);
+        if ($time_minutes === null || $start_minutes === null || $end_minutes === null) {
+            return false;
+        }
+
+        if ($start_minutes <= $end_minutes) {
+            return $time_minutes >= $start_minutes && $time_minutes <= $end_minutes;
+        }
+
+        return $time_minutes >= $start_minutes || $time_minutes <= $end_minutes;
+    };
+
+    $time_minutes = $time_to_minutes(date('H:i', $time_data));
     $close_shop                     = get_option('dsmart_close_shop');
     if ($date == null) {
         $current_date_text              = custom_date();
@@ -3823,18 +3857,22 @@ function is_discount_time($shoptime = null, $date = null, $method = "shipping")
         $current_date                   = $date;
     }
     if ($method == "shipping") {
-        $time_discount_shop             = get_option('time_discount_shop_' . $current_date_text);
+        $time_discount_shop             = ds_discount_option('time_discount_shop_' . $current_date_text);
     } else {
-        $time_discount_shop             = get_option('time_discount_shop_2_' . $current_date_text);
+        $time_discount_shop             = ds_discount_option('time_discount_shop_2_' . $current_date_text);
     }
-    $dsmart_custom_discount_date    = get_option('dsmart_custom_discount_date');
+    $dsmart_custom_discount_date    = ds_discount_option('dsmart_custom_discount_date');
+    $custom_time_found_for_date = false;
     if ($dsmart_custom_discount_date != "" && count($dsmart_custom_discount_date) > 0) {
         foreach ($dsmart_custom_discount_date as $item) {
             if ($current_date == $item['date']) {
+                $custom_time_found_for_date = true;
                 $time_arr = explode(',', $item['time']);
                 foreach ($time_arr as  $val) {
                     $val_Arr = explode('-', $val);
-                    if ($time_data >= strtotime($val_Arr[0]) && $time_data <= strtotime($val_Arr[1])) {
+                    $start = isset($val_Arr[0]) ? trim($val_Arr[0]) : '';
+                    $end = isset($val_Arr[1]) ? trim($val_Arr[1]) : '';
+                    if ($time_in_range($time_minutes, $start, $end)) {
                         $has_discount = true;
                         break;
                     }
@@ -3843,13 +3881,15 @@ function is_discount_time($shoptime = null, $date = null, $method = "shipping")
             }
         }
     }
-    if ($has_discount == false) {
+    if ($custom_time_found_for_date == false && $has_discount == false) {
         if ($time_discount_shop != "") {
             $time_discount_shop = explode(',', $time_discount_shop);
             foreach ($time_discount_shop as $time) {
                 $time_Arr = explode('-', $time);
 
-                if ($time_data >= strtotime($time_Arr[0]) && $time_data <= strtotime($time_Arr[1])) {
+                $start = isset($time_Arr[0]) ? trim($time_Arr[0]) : '';
+                $end = isset($time_Arr[1]) ? trim($time_Arr[1]) : '';
+                if ($time_in_range($time_minutes, $start, $end)) {
                     $has_discount = true;
                     break;
                 }
@@ -3881,16 +3921,19 @@ function get_total_cart($shipping_method, $shipping_data, $coupon_value = null, 
     $vat = ds_get_vat_total_item();
     $total_all = 0;
     if ($shipping_method == "shipping") {
-        $promotion = get_option('promotion');
-        $type_promotion  = get_option('type_promotion');
+        $promotion = ds_discount_option('promotion');
+        $type_promotion  = ds_discount_option('type_promotion');
         $has_discount = is_discount_time($shipping_data['delivery_time'], $shipping_data['delivery_date'], $shipping_method);
     } else {
-        $promotion = get_option('promotion_2');
-        $type_promotion  = get_option('type_promotion_2');
+        $promotion = ds_discount_option('promotion_2');
+        $type_promotion  = ds_discount_option('type_promotion_2');
         $has_discount = is_discount_time($shipping_data['shipping_time'], null, $shipping_method);
     }
-    $discount_cod = get_option('discount_cod');
-    $discount_shop = get_option('discount_shop');
+    if ((float) ds_discount_option('discount_min') > $total_cart) {
+        $has_discount = false;
+    }
+    $discount_cod = ds_discount_option('discount_cod');
+    $discount_shop = ds_discount_option('discount_shop');
     $tax_shipping = get_option('tax_shipping');
     $dsmart_distance        = get_option('dsmart_distance');
     $close_shop             = get_option('dsmart_close_shop');

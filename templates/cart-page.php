@@ -28,10 +28,10 @@ $dsmart_cart_background = get_option('dsmart_cart_background');
 $conflicts = get_items_categories_time_info_from_cart();
 $conflicts_all = get_items_categories_time_info_from_cart_with_no_custom_time();
 
-$type_promotion 		= get_option('type_promotion');	
-$promotion 				= get_option('promotion');	
-$type_promotion_2 		= get_option('type_promotion_2');	
-$promotion_2 			= get_option('promotion_2');	
+$type_promotion 		= ds_discount_option('type_promotion');
+$promotion 				= ds_discount_option('promotion');
+$type_promotion_2 		= ds_discount_option('type_promotion_2');
+$promotion_2 			= ds_discount_option('promotion_2');
 $has_discount 			= is_discount_time();
 $back_link_in_cart 		= get_option('back_link_in_cart');
 $tax_shipping 		    = get_option('tax_shipping');
