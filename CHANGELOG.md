@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1.24 (version reset)
+- Set the plugin version to 1.0.1.24 as requested; retain all current functionality.
+
 ## 1.0.1.36
 - Match custom discount settings to the default layout, with radio choices, weekday time buttons and special-date rows; remove explanatory text.
 - Lock default controls whenever a custom configuration exists, preserving saved default values and restoring editing after the last custom configuration is deleted.
