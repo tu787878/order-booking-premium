@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1.25
+- Restore a single editable direct-discount configuration; remove custom profiles and default locking.
+- Add an optional start/end date and time in Berlin time. Apply the discount only within this window; empty boundaries keep it unrestricted by date. Existing weekday, service and minimum-order rules still apply.
+
 ## 1.0.1.24 (version reset)
 - Set the plugin version to 1.0.1.24 as requested; retain all current functionality.
 
